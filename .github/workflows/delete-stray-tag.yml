@@ -1,0 +1,16 @@
+name: delete-stray-tag
+
+# One-off, manual. Removes the mistaken tag "main" made by the first release run (DECISIONS.md 16).
+# Delete this file after use.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  delete:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: git push origin ":refs/tags/main"
