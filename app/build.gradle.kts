@@ -68,6 +68,10 @@ android {
     }
 }
 
+dependencies {
+    implementation(libs.geckoview)
+}
+
 // D = 1 universal, 2 arm64 (DECISIONS.md 4)
 androidComponents {
     onVariants { variant ->
