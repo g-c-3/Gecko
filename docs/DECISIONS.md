@@ -7,7 +7,7 @@ Rule: no secret of any kind in any file, comment, workflow or commit message. Se
 
 ## 2. Privacy by default
 Rule: no telemetry, analytics, crash reporting, accounts, cloud sync or automated inference. Mozilla components with telemetry code (Glean and others) are disabled or not included; each session that adds one checks it opens no network connection of its own.
-Allowed network traffic: pages the user visits, and the tap-only update check (sideload flavor).
+Allowed network traffic: pages the user visits; the tap-only update check (sideload flavor); filter-list updates (23).
 Any new connection is flagged first and needs approval, with its data stated.
 Browsing data (history, bookmarks, cookies, passwords, downloads, tab state) stays on-device. Private tabs leave nothing on disk.
 
@@ -88,3 +88,39 @@ Rule: adaptive icon `mipmap-anydpi/ic_launcher.xml`. Foreground `drawable-nodpi/
 Source: logo supplied by the owner, made with an external image tool; the owner keeps the original file.
 Usage rights and the trademark check are settled before the Play listing (Phase 10). The 512 px store icon is made then from the same logo.
 Shipped as 0.0.3.
+
+## 20. Product direction
+Rule: Ardour is a private, light, customisable browser built around Spaces (21). Settings open with basic options only; an Advanced section holds the full range. Fast and smooth is a target of every phase, checked on device.
+Advanced options are curated: none weakens the engine, bypasses certificate checks or allows cleartext traffic. A raw engine preference editor is not included unless approved.
+Features are planned in ROADMAP.md; each phase is approved when it starts (25).
+
+## 21. Spaces
+Rule: a Space is an isolated browsing area: own cookies, cache, site storage, saved logins, history, private tabs. The term "Space" is used, not "account", to avoid a clash with 2.
+Six built-in Spaces. Space 1 is the default and can be neither deleted nor hidden. Built-in Spaces can be renamed and given a colour and icon. Up to ten in total: Spaces 7 to 10 are added by the user and can be deleted.
+Switching Space, adding or deleting a Space, and the setting "open with default or last-used Space" need device authentication (biometric or phone password). Deleting erases the Space's data after a confirmation.
+Clearing cache and site data per Space keeps saved logins; a separate action clears logins.
+Spaces are stored as a list with ids, never as fixed numbers. A Space holds no data until first opened.
+Engine: one context id per Space, set when a tab is created and not changeable afterwards; verified against the pinned engine's documentation in Phase 2.
+
+## 22. Space lock and saved logins
+Rule: the lock is an app-level lock, not file encryption; Settings says so. Saved logins are encrypted with a key in Android's secure key store, one per Space.
+Authentication uses `androidx.biometric` (Apache 2.0) or the platform equivalent; the license is recorded under 11 when adopted.
+Shortcuts to a Space still require authentication. The panic shortcut wipes and locks without a prompt.
+
+## 23. Second approved connection: filter-list updates
+Rule: ad-filter lists are built into each release, so blocking works with no connection. Updates: a tap-only button, and a scheduled background update at most once a day, on Wi-Fi only, with a Settings switch that turns it off completely.
+Lists come only from the GitHub release host used by the update check, built and checksummed by CI. The app verifies SHA-256 before use.
+Data: the host sees the device's internet address and the request time, at regular intervals. Nothing else is sent: no token, no identifier, no page visited.
+Amends 2. Phase 8 verifies engine support and the license of the lists and of any extension against MPL 2.0 (11, 17) before building; a blocker returns here for approval.
+
+## 24. Engine target
+Rule: Phase 2 pins GeckoView 159.0.x (stable). 160.0 is beta; the earlier candidate `160.0.20261104181552` is dropped.
+Candidates and fallback: ROADMAP.md, Phase 2. CI resolution confirms the pin.
+Evidence: Firefox for Android release notes (stable 159.0.1; 160.0 in beta), Maven mirror listing, a third-party release naming a 159.0 build. Mozilla's Maven not read directly (unreachable from the sandbox).
+
+## 25. Feature plan and approval
+Rule: two-step approval. Only Phase 2 is approved; other features are planned in ROADMAP.md and approved per phase.
+Build order: 2, 3, 4, 12, 5, 6, 7, 8, 11, 13, 9, 10. First public release after Phase 8.
+Not included: data-saver proxy, voice search, cloud sync and backup, crypto wallet.
+Needs its own approval: forced dark mode on every page, page translation, web push, add-on store, cookie-banner lists, encrypted DNS, search suggestions, safe-browsing lookups.
+Similar Gecko-based browsers exist. No code is copied from them; one is AGPL-3.0, which conflicts with 17.

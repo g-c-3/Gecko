@@ -2,6 +2,13 @@
 
 Numbered, never dated. Dates live in TRACK.md.
 
+## 7
+- Built: no code. Product discussion concluded: Spaces (six, up to ten), second approved connection (filter-list updates), feature plan with phases 11 to 13, Basic and Advanced settings. Docs updated.
+- Fixed: engine candidate corrected. Stable is 159.0.x; 160.0 is beta, so session 5 and 6 entries naming `160.0.20261104181552` are superseded (decision 24).
+- Decisions: 20 to 25. Only Phase 2 approved; rest planned.
+- Engine: none pinned. Candidates `geckoview:159.0.20261102144711`, fallback `159.0.20261022150525`; verified through search only (Maven mirror listing, third-party release), Mozilla's Maven not read.
+- Next start: Phase 2 (ROADMAP 2). Read `app/build.gradle.kts`, `libs.versions.toml`, manifest first. Open: release 0.0.3 status (GitHub API was rate-limited); DP0 on 0.0.2; DP9; approval of the project-instructions update (second connection, plus the filter-list schedule; owner pastes the current text).
+
 ## 6
 - Built: adaptive launcher icon from the owner's logo (decision 19); manifest icon reference; version 0.0.3. Docs brought up to date.
 - Fixed: nothing.

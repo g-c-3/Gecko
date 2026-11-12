@@ -10,3 +10,4 @@ Maps session, decision and roadmap phase to a date. Append only; never edit a pa
 | 4 | none | 1 (part) | 2026-11-12 | Build run 3 green; engine check not verified |
 | 5 | 15-18 | 1 (done), 2 (research) | 2026-11-12 | Signed automatic release 0.0.1, 0.0.2; license, application id; engine candidate 160.0 identified |
 | 6 | 19 | 9 (icon, early) | 2026-11-12 | Launcher icon and version 0.0.3 delivered; docs updated |
+| 7 | 20-25 | 2 (approved), 11-13 (planned) | 2026-11-13 | Product plan, Spaces, filter-list connection approved; engine candidate corrected to 159.0.x; docs updated |
