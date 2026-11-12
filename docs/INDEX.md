@@ -7,9 +7,9 @@ Pointers only.
 | File | Holds | Range | Older parts |
 |---|---|---|---|
 | ROADMAP.md | Phase checklist and detail | Phases 0-11 | none |
-| DECISIONS.md | Numbered decisions | 1-13 | none |
-| SESSIONS.md | Session log | 1-2 | none |
-| TRACK.md | Session/decision/phase to date | Sessions 1-2 | none |
+| DECISIONS.md | Numbered decisions | 1-14 | none |
+| SESSIONS.md | Session log | 1-3 | none |
+| TRACK.md | Session/decision/phase to date | Sessions 1-3 | none |
 | ARCHITECTURE.md | Layers, network, security checks, CI | n/a | none |
 
 ## Standing decisions
@@ -35,5 +35,6 @@ Pointers only.
 | Version or release | DECISIONS.md 4, 5 |
 | Signing | DECISIONS.md 6, 13 |
 | Toolchain versions | DECISIONS.md 12 |
+| Workflow actions, pinning | DECISIONS.md 14 |
 | What to build next | ROADMAP.md |
 | When something happened | TRACK.md |

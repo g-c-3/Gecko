@@ -56,3 +56,7 @@ SDK levels are provisional until Phase 2 verifies the engine's requirement.
 Rule: no keystore, password or key in a workflow artifact, log, input or summary.
 Cause: artifacts of a public repo can be downloaded by any signed-in GitHub user; workflow inputs and logs are public.
 
+## 14. Workflow hygiene
+Rule: every third-party action pinned by full commit SHA with its tag in a comment. Wrapper validated in CI. No caching action (its license and data handling are unverified); builds use the wrapper directly.
+Workflows request `contents: read` only.
+

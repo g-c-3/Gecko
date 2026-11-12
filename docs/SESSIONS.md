@@ -2,6 +2,13 @@
 
 Numbered, never dated. Dates live in TRACK.md.
 
+## 3
+- Built: `app` module (no engine, plain activity), version wiring with ABI splits, `build-android.yml` (debug build), `verification-bootstrap.yml`.
+- Fixed: nothing. API forms checked against AGP documentation: `compileSdk { version = release(..) }`, `output.versionCode.set`.
+- Decisions: 14.
+- Engine: none pinned yet.
+- Next start: owner runs both workflows; paste any failing step. Then keystore method, license, app id approval.
+
 ## 2
 - Built: toolchain pinned (decision 12): Gradle wrapper 9.9.1, `gradle/libs.versions.toml`, root Gradle files.
 - Fixed: nothing. Found: docs were uploaded to the repo root; they belong in `docs/`.
