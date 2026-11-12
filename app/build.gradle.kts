@@ -22,7 +22,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "io.github.g_c_3.ardour"
+        applicationId = "io.github.gc3.ardour"
         minSdk {
             version = release(26)
         }
