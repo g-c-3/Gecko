@@ -8,8 +8,8 @@ Pointers only.
 |---|---|---|---|
 | ROADMAP.md | Phase checklist and detail | Phases 0-11 | none |
 | DECISIONS.md | Numbered decisions | 1-14 | none |
-| SESSIONS.md | Session log | 1-3 | none |
-| TRACK.md | Session/decision/phase to date | Sessions 1-3 | none |
+| SESSIONS.md | Session log | 1-4 | none |
+| TRACK.md | Session/decision/phase to date | Sessions 1-4 | none |
 | ARCHITECTURE.md | Layers, network, security checks, CI | n/a | none |
 
 ## Standing decisions

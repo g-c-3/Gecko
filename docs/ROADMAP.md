@@ -22,7 +22,7 @@
 - Gradle files deferred to Phase 1 (decision 9).
 
 ### 1 CI, signing and versioning
-Done (sessions 2 and 3, not yet run through CI):
+Done (sessions 2 to 4; CI run 3 green, not run on a device):
 - Toolchain pinned (decision 12); wrapper and root Gradle files.
 - `app` module without engine; `versionName`/`versionCode` from `version.properties`; ABI splits (arm64, universal).
 - `build-android.yml`: debug APKs on push and pull request.
