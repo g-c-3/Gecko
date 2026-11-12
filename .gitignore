@@ -1,0 +1,18 @@
+# Build output
+build/
+.gradle/
+*.apk
+*.aab
+
+# Local config
+local.properties
+.idea/
+*.iml
+.DS_Store
+
+# Signing material: never in the repo
+*.jks
+*.keystore
+*.p12
+*.pem
+keystore.properties
