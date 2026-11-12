@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Gecko"
+include(":app")
