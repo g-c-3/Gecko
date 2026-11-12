@@ -9,6 +9,9 @@
 - `sideload`: GitHub releases, update button, install permission.
 - `play`: Play Store; no updater code, no install permission.
 
+## Resources
+- Launcher icon: adaptive, in `app/src/main/res` (`mipmap-anydpi`, `drawable-nodpi`, `values`); DECISIONS.md 19.
+
 ## Network
 Allowed connections:
 1. Pages the user visits.

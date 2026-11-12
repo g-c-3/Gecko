@@ -82,3 +82,9 @@ Rule: application id `io.github.gc3.ardour`. The source package and `namespace` 
 Release 0.0.1 carries the old id `io.github.g_c_3.ardour`; it cannot update to 0.0.2 and is superseded. It stays downloadable.
 minSdk 26 and SDK 36 stay provisional until Phase 2 checks the engine's requirement.
 The id cannot change after a Play listing exists.
+
+## 19. Launcher icon
+Rule: adaptive icon `mipmap-anydpi/ic_launcher.xml`. Foreground `drawable-nodpi/ic_launcher_foreground.png` (432 px, transparent, the flame "A" only, no wordmark). Background color `#242630`. Referenced by `android:icon`. No legacy raster icons (minSdk 26); no monochrome layer yet.
+Source: logo supplied by the owner, made with an external image tool; the owner keeps the original file.
+Usage rights and the trademark check are settled before the Play listing (Phase 10). The 512 px store icon is made then from the same logo.
+Shipped as 0.0.3.

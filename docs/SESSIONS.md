@@ -2,6 +2,13 @@
 
 Numbered, never dated. Dates live in TRACK.md.
 
+## 6
+- Built: adaptive launcher icon from the owner's logo (decision 19); manifest icon reference; version 0.0.3. Docs brought up to date.
+- Fixed: nothing.
+- Decisions: 19.
+- Engine: none pinned. Candidate `geckoview:160.0.20261104181552` (ROADMAP 2).
+- Next start: owner-led product discussion on what makes the browser distinct (Phase 11 inputs); no build until it concludes. Then Phase 2. Open: release 0.0.3 result; DP9 (icon) and DP0 on 0.0.2; approval of the project-instructions update.
+
 ## 5
 - Built: Phase 1 finished. Release key and secrets; `build-android.yml` with `build`, `plan`, `release` jobs; MPL 2.0 `LICENSE`; application id `io.github.gc3.ardour`; version 0.0.2.
 - Fixed: first release run tagged the release `main` (tag taken from the branch name). Tag now `v<version>`. Stray tag and release removed.

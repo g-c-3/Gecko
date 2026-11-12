@@ -27,8 +27,10 @@
 - `verification-bootstrap.yml`: manual; checksum file committed.
 - Signing key and secrets (decision 15). License MPL 2.0 (decision 17). Application id (decision 18).
 - DP0: release 0.0.1 installed and opened on device. Release 0.0.2 (new application id): device result pending.
+- Launcher icon shipped early as 0.0.3 (decision 19); see Phase 9.
 
 ### 2 Hello GeckoView
+- Starts after the product discussion (see Phase 11).
 - Engine candidate, not pinned yet: `org.mozilla.geckoview:geckoview:160.0.20261104181552` (Firefox for Android 160.0 stable). Evidence: Firefox release notes; version string seen in third-party reports. Not read from Mozilla's Maven (unreachable from the sandbox). Confirm by adding the pin and letting CI resolve it.
 - Mozilla Maven repository `https://maven.mozilla.org/maven2/` with `includeGroup("org.mozilla.geckoview")` only.
 - Java 17 flags (already set). Check the engine's minSdk against decision 18.
@@ -65,7 +67,9 @@
 - DP7: blocking and controls on device.
 
 ### 9 Theming and polish
-- Light and dark themes, icons, layout. Placeholder screen text sits under the status bar; replaced in Phase 2.
+- Launcher icon done early (decision 19). DP9: icon looks right on the launcher (0.0.3).
+- Remaining: light and dark themes, layout. Placeholder screen text sits under the status bar; replaced in Phase 2.
+- Monochrome icon layer; 512 px store icon (Phase 10).
 - DP8: appearance on device.
 
 ### 10 Play Store preparation
@@ -73,4 +77,4 @@
 - Record the signature difference again in DECISIONS.md.
 
 ### 11 Distinguishing features
-- Decided by the owner.
+- Decided by the owner. A product discussion is held before any further build; its outcome is recorded in DECISIONS.md and may reorder phases 3 to 9.
