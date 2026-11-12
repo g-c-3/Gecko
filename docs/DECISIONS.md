@@ -60,3 +60,25 @@ Cause: artifacts of a public repo can be downloaded by any signed-in GitHub user
 Rule: every third-party action pinned by full commit SHA with its tag in a comment. Wrapper validated in CI. No caching action (its license and data handling are unverified); builds use the wrapper directly.
 Workflows request `contents: read` only.
 
+## 15. Release key made outside GitHub (exception to 6 and 13)
+Rule: one RSA 4096 key, alias `ardour`, valid 100 years, generated once outside GitHub and delivered to the owner as files. The owner loaded it into repository secrets (`KEYSTORE_BASE64`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`). The owner keeps the keystore file and its password as the backup outside GitHub.
+Cause: owner decision; the key could not be generated on a phone.
+Risk: the key and password passed through a chat transcript. Rotate before the Play listing if that is a concern; nothing signed is in use beyond the owner's device.
+Certificate SHA-256 (public): `0d11cb47bebabb3197d38fed88e6c2f3c5cc5863e3931cdb6a4e976eda591c03`. The release job fails if an APK carries another certificate.
+Standing for 6 and 13: keystore and passwords never in the repo, workflow artifacts, logs or inputs.
+
+## 16. Automatic release
+Rule: a push to `main` whose `version.properties` holds a version with no tag `vX.Y.Z` builds, signs and publishes that release. The release creates the tag on the pushed commit. This replaces "a tag triggers the release" in 4 and 5.
+Release job: only job with `contents: write` and with secrets; keystore file removed after the build; APK names `Ardour-X.Y.Z-arm64.apk` and `Ardour-X.Y.Z-universal.apk`; notes carry engine, certificate SHA-256 and each APK's SHA-256. No third-party release action; GitHub's own `gh` command.
+A code change without a version bump releases nothing.
+Cause of the first defect: the tag was taken from the branch name. Fixed: `v<version>`. The mistaken release and tag `main` were removed; an exception to "never deleted", since nobody had installed it.
+
+## 17. App license
+Rule: the app's own code is MPL 2.0 (matches Gecko). `LICENSE` at the repo root, text copied from Mozilla's geckodriver repository. No per-file headers.
+GeckoView is MPL 2.0; recorded under 11 when adopted in Phase 2.
+
+## 18. Application id and SDK levels
+Rule: application id `io.github.gc3.ardour`. The source package and `namespace` stay `io.github.g_c_3.ardour` (internal only).
+Release 0.0.1 carries the old id `io.github.g_c_3.ardour`; it cannot update to 0.0.2 and is superseded. It stays downloadable.
+minSdk 26 and SDK 36 stay provisional until Phase 2 checks the engine's requirement.
+The id cannot change after a Play listing exists.
