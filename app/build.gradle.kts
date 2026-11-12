@@ -65,6 +65,13 @@ android {
         }
     }
 
+    // Engine libraries compressed inside the APK: about half the download, more space after install (DECISIONS.md 28).
+    packaging {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
