@@ -102,8 +102,9 @@ jobs:
           done
       - name: Release notes
         run: |
+          ENGINE=$(sed -n 's/^geckoview = "\(.*\)"$/\1/p' gradle/libs.versions.toml)
           {
-            echo "Engine: none (no engine included yet)"
+            echo "Engine: GeckoView $ENGINE"
             echo
             echo "Signing certificate SHA-256: $EXPECTED_CERT_SHA256"
             echo
