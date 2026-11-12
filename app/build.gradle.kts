@@ -17,8 +17,11 @@ val baseCode = (verMajor * 10000 + verMinor * 100 + verPatch) * 10
 
 android {
     namespace = "io.github.g_c_3.ardour"
+    // Engine requires 37.2 (DECISIONS.md 27). targetSdk and minSdk are separate and unchanged.
     compileSdk {
-        version = release(36)
+        version = release(37) {
+            minorApiLevel = 2
+        }
     }
 
     defaultConfig {
