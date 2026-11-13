@@ -2,6 +2,13 @@
 
 Numbered, never dated. Dates live in TRACK.md.
 
+## 18
+- Checked: 0.0.8 released and installed. DP2 passed from a recording: Settings shows Ardour 0.0.8 and WebView 157.0.8103.38. Scroll with the Settings button: median gap 16.4 ms, no fast-motion gap over 34 ms, about 3 flicks only.
+- Decisions: none.
+- Engine: `androidx.webkit` 1.18.0 (newest stable not rechecked this turn). APK size: 3,021,332 bytes (2.88 MiB) at 0.0.8, from the download header.
+- Not measured: start-up with the button, 10-flick scroll, Settings text contrast (value lines are light grey).
+- Next start: Phase 3 step 2, the updater (check, download, SHA-256, system installer). Needs API checks for the installer first.
+
 ## 17
 - Built: Phase 3 step 1, not run through CI or on a device: `sideload` and `play` flavors (CI builds `sideload`), `SettingsActivity` with About, WebView version from the adapter, temporary Settings button. Ships with the gate screen as 0.0.8 (0.0.8 was never committed on its own).
 - Decisions: 35 (targets approved, Phase 3 approved, two steps).
