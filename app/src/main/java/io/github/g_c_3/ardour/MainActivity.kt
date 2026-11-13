@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -25,6 +27,7 @@ class MainActivity : Activity() {
             root.addView(gateView(gateMessage), match)
         } else {
             root.addView(EngineAdapter.createView(this) { root.post { recreate() } }, match)
+            root.addView(settingsButton(), settingsButtonParams())
         }
         // Target SDK 36 draws edge to edge; keep the page clear of the system bars.
         root.setOnApplyWindowInsetsListener { v, insets ->
@@ -38,6 +41,27 @@ class MainActivity : Activity() {
         }
         setContentView(root)
     }
+
+    // Temporary entry to Settings until the browser menu (Phase 4).
+    private fun settingsButton(): View = TextView(this).apply {
+        text = "Settings"
+        textSize = 14f
+        setTextColor(Color.WHITE)
+        setPadding(dp(16), dp(10), dp(16), dp(10))
+        background = GradientDrawable().apply {
+            setColor(0xCC242630.toInt())
+            cornerRadius = dp(24).toFloat()
+        }
+        setOnClickListener { startActivity(Intent(this@MainActivity, SettingsActivity::class.java)) }
+    }
+
+    private fun settingsButtonParams() = FrameLayout.LayoutParams(
+        ViewGroup.LayoutParams.WRAP_CONTENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT,
+        Gravity.BOTTOM or Gravity.END,
+    ).apply { setMargins(dp(16), dp(16), dp(16), dp(16)) }
+
+    private fun dp(n: Int): Int = (n * resources.displayMetrics.density).toInt()
 
     private fun gateView(message: String): View {
         val column = LinearLayout(this).apply {

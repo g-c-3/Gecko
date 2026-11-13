@@ -28,6 +28,10 @@ object EngineAdapter {
             "Ardour needs a newer Android System WebView.\n\nOpen it in the Play Store, tap Update, then open Ardour again.\n\nNo Play Store? Update WebView through your phone maker's app store or system update."
     }
 
+    // For Settings: the WebView package and version in use, or null when none is found.
+    fun webViewVersion(context: Context): String? =
+        WebViewCompat.getCurrentWebViewPackage(context)?.let { "${it.versionName} (${it.packageName})" }
+
     @SuppressLint("SetJavaScriptEnabled")
     @Suppress("DEPRECATION")
     fun createView(context: Context, onEngineLost: () -> Unit): View {
