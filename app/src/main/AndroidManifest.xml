@@ -16,6 +16,9 @@
             android:name="android.webkit.WebView.MetricsOptOut"
             android:value="true" />
         <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboard|keyboardHidden|navigation|uiMode|density"
             android:windowSoftInputMode="stateUnspecified|adjustResize"
