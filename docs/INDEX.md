@@ -7,9 +7,9 @@ Pointers only.
 | File | Holds | Range | Older parts |
 |---|---|---|---|
 | ROADMAP.md | Phase checklist, detail, quality targets | Phases 0-13 | none |
-| DECISIONS.md | Numbered decisions | 1-34 | none |
-| SESSIONS.md | Session log | 1-16 | none |
-| TRACK.md | Session/decision/phase to date | Sessions 1-16 | none |
+| DECISIONS.md | Numbered decisions | 1-35 | none |
+| SESSIONS.md | Session log | 1-17 | none |
+| TRACK.md | Session/decision/phase to date | Sessions 1-17 | none |
 | ARCHITECTURE.md | Layers, network, security checks, CI | n/a | none |
 
 ## Standing decisions
@@ -37,6 +37,7 @@ Pointers only.
 | 31 | Features under WebView: native, built, reduced | DECISIONS.md |
 | 33 | Repository is `g-c-3/weber` | DECISIONS.md |
 | 34 | Gate screen has a Play Store button (an intent, not a connection) | DECISIONS.md |
+| 35 | Quality targets (start-up, scroll, size) | DECISIONS.md |
 | 32 | `androidx.webkit` pin, license, gate by run-time check, Default profile in Phase 2 | DECISIONS.md |
 
 ## Where to look

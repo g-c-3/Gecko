@@ -2,6 +2,13 @@
 
 Numbered, never dated. Dates live in TRACK.md.
 
+## 17
+- Built: Phase 3 step 1, not run through CI or on a device: `sideload` and `play` flavors (CI builds `sideload`), `SettingsActivity` with About, WebView version from the adapter, temporary Settings button. Ships with the gate screen as 0.0.8 (0.0.8 was never committed on its own).
+- Decisions: 35 (targets approved, Phase 3 approved, two steps).
+- Risk: flavor DSL and renamed APK paths are untested in CI; a red build is likely to be a path or flavor error.
+- Engine: `androidx.webkit` 1.18.0. APK size: not read.
+- Next start: owner commits and confirms DP2; then updater (step 2).
+
 ## 16
 - Built: gate screen now says how to update WebView and has an Open Play Store button (decision 34); version 0.0.8. Not run through CI or on a device; the screen cannot be shown on a current phone. Phase 2 marked complete; gate message and Android 10 start moved to the Phase 5 launch test.
 - Verified: on Android 10 and higher WebView is the separate app `com.google.android.webview` and Chrome cannot provide it (Chromium WebView documentation). Not verified: how the Play Store handles the link on every phone.

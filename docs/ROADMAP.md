@@ -61,9 +61,10 @@ Settings (decision 20): basic options by default; an Advanced section holds the 
 
 ### 3 Settings screen and in-app update
 - Settings screen: basic list plus Advanced section (decision 20); "Check for updates" (sideload only). About shows the app version and the phone's WebView version.
+- Step 1 (0.0.8, built, not run through CI or on a device): `sideload` and `play` flavors, Settings screen with About (app and WebView version), temporary Settings button. Step 2: updater. Advanced section waits for its first setting.
 - Version compare number by number; the one APK (decision 27); SHA-256 check; system installer.
 - (planned) Local crash log, shared only on tap.
-- DP2: settings opens. DP3: update check and install.
+- DP2: settings opens and shows both versions; re-measure start-up and scroll with the button. DP3: update check and install.
 
 ### 4 Basic browser
 - Address bar, back, forward, reload, progress. Replace the placeholder start page (`https://example.com`).
@@ -136,7 +137,7 @@ Settings (decision 20): basic options by default; an Advanced section holds the 
 
 ### Quality targets
 - Size: 2.88 MB measured at 0.0.6 (release page), under the 5 MB aim of decision 30; target set after the shrinking decision. Each dependency states its size cost.
-- Start-up and frame rate: measured session 15 on moto g34 5G, Android 15, 0.0.7, screen recording (accuracy about one video frame, 17 ms). Cold start, first launch frame to first page: 0.51, 0.56, 0.60 s (mean 0.56 s); example.com, network and cache unknown. Scroll, same IANA page, same method: Ardour 0.0.7 median frame gap 16.8 ms (5 flicks, 5 of 161 gaps over 34 ms; two later recordings, probably Ardour: 16.9 and 16.8 ms); reference browser 16.8 ms (6 flicks, 5 of 255 over 34 ms). No gap over 34 ms during fast motion in any recording; every longer gap sits where motion slows or the finger changes direction. Ardour matches the reference. Proposed targets (revised, pending approval): cold start to first page 0.50 s or less, mean of 3, and never above 0.60 s in any phase without a decision entry; no white flash, Ardour's own themed window shown before the page; median scroll gap 17 ms or less with no mid-flick gap over 34 ms in 10 flicks, and never worse than the same page in a reference browser on the same phone; APK 5 MB or less through Phase 8. Re-measured every phase.
+- Start-up and frame rate: measured session 15 on moto g34 5G, Android 15, 0.0.7, screen recording (accuracy about one video frame, 17 ms). Cold start, first launch frame to first page: 0.51, 0.56, 0.60 s (mean 0.56 s); example.com, network and cache unknown. Scroll, same IANA page, same method: Ardour 0.0.7 median frame gap 16.8 ms (5 flicks, 5 of 161 gaps over 34 ms; two later recordings, probably Ardour: 16.9 and 16.8 ms); reference browser 16.8 ms (6 flicks, 5 of 255 over 34 ms). No gap over 34 ms during fast motion in any recording; every longer gap sits where motion slows or the finger changes direction. Ardour matches the reference. Targets (approved, decision 35): cold start to first page 0.50 s or less, mean of 3, and never above 0.60 s in any phase without a decision entry; no white flash, Ardour's own themed window shown before the page; median scroll gap 17 ms or less with no mid-flick gap over 34 ms in 10 flicks, and never worse than the same page in a reference browser on the same phone; APK 5 MB or less through Phase 8. Re-measured every phase.
 - Visual quality: custom-drawn views and spring motion; judged on device by the owner each phase.
 
 ### Later (each needs its own approval)

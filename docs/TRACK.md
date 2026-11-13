@@ -20,3 +20,4 @@ Maps session, decision and roadmap phase to a date. Append only; never edit a pa
 | 14 | none | 2 (DP14) | 2026-11-13 | Status-bar icon fix for 0.0.7 delivered; not yet built |
 | 15 | none | 2 (measurement) | 2026-11-14 | Start-up and scroll measured from a screen recording; targets proposed |
 | 16 | 34 | 2 complete | 2026-11-14 | Gate screen with Play Store button for 0.0.8; Phase 2 closed; gate test moved to Phase 5 |
+| 17 | 35 | 3 (step 1) | 2026-11-14 | Targets and Phase 3 approved; flavors and Settings built for 0.0.8 |

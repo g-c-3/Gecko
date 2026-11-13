@@ -183,3 +183,8 @@ Rule: the repository is `g-c-3/weber`. The update check (Phase 3) uses `https://
 Rule: when the launch gate (28) is unmet, the screen shows what to do and one button that opens `https://play.google.com/store/apps/details?id=com.google.android.webview`. On Android 10 and higher WebView is the separate Android System WebView app, and Chrome can no longer provide it (Chromium WebView documentation).
 The button is an intent on the user's tap. Ardour opens no connection and sends nothing; the Play Store or browser makes the request. Not a third app-originated connection (IN-APP UPDATE), recorded here so it is not mistaken for one.
 Phones without Play Store updates get the text only: update through the phone maker's store or system update.
+
+## 35. Quality targets set; Phase 3 approved
+Targets (measured baselines in ROADMAP, Quality targets): cold start to first page 0.50 s or less (mean of 3) and never above 0.60 s in any phase without a decision entry; no white flash, Ardour's own themed window before the page; median scroll gap 17 ms or less, no mid-flick gap over 34 ms in 10 flicks, never worse than a reference browser on the same page and phone; APK 5 MB or less through Phase 8.
+Phase 3 is built in two steps: flavors and Settings first, the updater second. The Settings button over the page is temporary until the browser menu (Phase 4); start-up and scroll are re-measured with it.
+
