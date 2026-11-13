@@ -1,4 +1,3 @@
-import com.android.build.api.variant.FilterConfiguration
 import java.util.Properties
 
 plugins {
@@ -17,32 +16,22 @@ val baseCode = (verMajor * 10000 + verMinor * 100 + verPatch) * 10
 
 android {
     namespace = "io.github.g_c_3.ardour"
-    // Engine requires 37.2 (DECISIONS.md 27). targetSdk and minSdk are separate and unchanged.
+    // Provisional (DECISIONS.md 32): the build shows whether androidx.webkit needs more.
     compileSdk {
-        version = release(37) {
-            minorApiLevel = 2
-        }
+        version = release(36)
     }
 
     defaultConfig {
         applicationId = "io.github.gc3.ardour"
         minSdk {
-            version = release(26)
+            version = release(29)
         }
         targetSdk {
             version = release(36)
         }
-        versionCode = baseCode
+        // D = 1: sideload APK (DECISIONS.md 27)
+        versionCode = baseCode + 1
         versionName = "$verMajor.$verMinor.$verPatch"
-    }
-
-    splits {
-        abi {
-            isEnable = true
-            reset()
-            include("arm64-v8a")
-            isUniversalApk = true
-        }
     }
 
     // Signing material comes from the release job's environment only (DECISIONS.md 6, 13, 15).
@@ -65,13 +54,6 @@ android {
         }
     }
 
-    // Engine libraries compressed inside the APK: about half the download, more space after install (DECISIONS.md 28).
-    packaging {
-        jniLibs {
-            useLegacyPackaging = true
-        }
-    }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -79,17 +61,5 @@ android {
 }
 
 dependencies {
-    implementation(libs.geckoview)
-}
-
-// D = 1 universal, 2 arm64 (DECISIONS.md 4)
-androidComponents {
-    onVariants { variant ->
-        variant.outputs.forEach { output ->
-            val abi = output.filters
-                .find { it.filterType == FilterConfiguration.FilterType.ABI }
-                ?.identifier
-            output.versionCode.set(baseCode + if (abi == "arm64-v8a") 2 else 1)
-        }
-    }
+    implementation(libs.androidx.webkit)
 }
