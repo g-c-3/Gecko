@@ -39,7 +39,9 @@ Settings (decision 20): basic options by default; an Advanced section holds the 
 ### 2 Hello WebView (approved)
 - State: releases 0.0.4 and 0.0.5 run GeckoView `159.0.20261102144711` (decision 24, superseded). DP1 passed on both: a page loads, below the status bar. Sizes: arm64 91.2 MB, universal 237 MB.
 - Engine is now system WebView (decision 26). Remove from the repo: GeckoView dependency and `libs.versions.toml` entry, Mozilla Maven in `settings.gradle.kts`, Kotlin 2.4.20 classpath override in the root build file, compileSdk 37.2 and `useLegacyPackaging` in `app/build.gradle.kts`. Let the build decide whether `androidx.webkit` needs any of them.
-- Verify the latest stable `androidx.webkit` on developer.android.com; pin it; record its license (decision 11).
+- `androidx.webkit` verified on developer.android.com (session 9): stable 1.18.0; 1.19.0-alpha01 is alpha and not used. Pin 1.18.0 in `libs.versions.toml`; record its license (decision 11), its size cost and the compileSdk it needs from the build.
+- API forms verified (session 9): `ProfileStore.getInstance().getOrCreateProfile(name)` and `WebViewCompat.setProfile(webView, name)`, both behind `WebViewFeature.MULTI_PROFILE`. `WebViewBuilder` is experimental: not used.
+- Still to verify before any code: minimum WebView version for `MULTI_PROFILE`; the ordering rule of `setProfile` against other WebView calls; `getCurrentWebViewPackage`; each `WebSettings` call in ARCHITECTURE.md Security checks; the renderer-gone callback; the Apache 2.0 license.
 - minSdk 29 (decision 28). Manifest: INTERNET (present), Safe Browsing off and metrics opt-out meta-data (decision 29), `allowBackup=false` (confirm).
 - Launch gate (decision 28): WebView package version through `WebViewCompat.getCurrentWebViewPackage`; `WebViewFeature.isFeatureSupported` for profiles; full-screen message when unmet. Find the minimum WebView version for the features needed; record it in DECISIONS.md.
 - Rewrite `EngineAdapter.kt` for WebView; one screen; one page loads. WebView settings per ARCHITECTURE.md, Security checks. Handle the renderer-gone callback as documented.
