@@ -1,1 +1,8 @@
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Ardour" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <!-- Dark status and navigation icons on the light page (DP14). Static until theming (Phase 9). -->
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+</resources>
