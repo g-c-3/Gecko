@@ -1,9 +1,9 @@
 [versions]
 agp = "9.5.1"
-geckoview = "159.0.20261102144711"
+webkit = "1.18.0"
 
 [libraries]
-geckoview = { module = "org.mozilla.geckoview:geckoview", version.ref = "geckoview" }
+androidx-webkit = { module = "androidx.webkit:webkit", version.ref = "webkit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
