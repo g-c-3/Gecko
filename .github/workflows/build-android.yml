@@ -76,7 +76,7 @@ jobs:
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
         run: printf '%s' "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/ardour-release.p12"
-      - name: Build signed APKs
+      - name: Build signed APK
         env:
           KEYSTORE_PATH: ${{ runner.temp }}/ardour-release.p12
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -91,8 +91,7 @@ jobs:
           APKSIGNER=$(ls -d "$ANDROID_HOME"/build-tools/*/apksigner | sort -V | tail -1)
           OUT=app/build/outputs/apk/release
           mkdir dist
-          cp "$OUT/app-arm64-v8a-release.apk" "dist/Ardour-$VERSION-arm64.apk"
-          cp "$OUT/app-universal-release.apk" "dist/Ardour-$VERSION-universal.apk"
+          cp "$OUT/app-release.apk" "dist/Ardour-$VERSION.apk"
           for f in dist/*.apk; do
             "$APKSIGNER" verify --print-certs "$f" > cert.txt
             if ! grep -qi "SHA-256 digest: $EXPECTED_CERT_SHA256" cert.txt; then
@@ -102,9 +101,9 @@ jobs:
           done
       - name: Release notes
         run: |
-          ENGINE=$(sed -n 's/^geckoview = "\(.*\)"$/\1/p' gradle/libs.versions.toml)
+          WEBKIT=$(sed -n 's/^webkit = "\(.*\)"$/\1/p' gradle/libs.versions.toml)
           {
-            echo "Engine: GeckoView $ENGINE"
+            echo "Engine: the phone's Android System WebView (Android 10 or newer; profile support checked at launch). Library: androidx.webkit $WEBKIT."
             echo
             echo "Signing certificate SHA-256: $EXPECTED_CERT_SHA256"
             echo
