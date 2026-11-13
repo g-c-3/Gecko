@@ -19,3 +19,4 @@ Maps session, decision and roadmap phase to a date. Append only; never edit a pa
 | 13 | 33 | 2 (device check) | 2026-11-13 | 0.0.6 released and runs; APK 2.88 MB; repo renamed to weber |
 | 14 | none | 2 (DP14) | 2026-11-13 | Status-bar icon fix for 0.0.7 delivered; not yet built |
 | 15 | none | 2 (measurement) | 2026-11-14 | Start-up and scroll measured from a screen recording; targets proposed |
+| 16 | 34 | 2 complete | 2026-11-14 | Gate screen with Play Store button for 0.0.8; Phase 2 closed; gate test moved to Phase 5 |

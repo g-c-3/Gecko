@@ -4,7 +4,7 @@
 
 - [x] 0 Repo scaffold and docs
 - [x] 1 CI, signing and versioning
-- [ ] 2 Hello WebView
+- [x] 2 Hello WebView
 - [ ] 3 Settings screen and in-app update
 - [ ] 4 Basic browser
 - [ ] 5 Dependency update pipeline and launch test
@@ -74,7 +74,7 @@ Settings (decision 20): basic options by default; an Advanced section holds the 
 
 ### 5 Dependency update pipeline and launch test
 - `dependency-update.yml`: scheduled check for a newer stable `androidx.webkit` (stable only); one pull request that changes the pin, bumps the patch version, regenerates verification metadata and builds. Replaces the GeckoView engine pipeline.
-- Launch test in CI (emulator installs the APK, loads a local page).
+- Launch test in CI (emulator installs the APK, loads a local page). Runs on an Android 10 image and on the current one. Gate check: an emulator with an old or missing WebView must show the gate message and its button (decisions 28, 34). Closes the gate-message item left open in Phase 2.
 - Credential method for starting the build verified against current GitHub documentation; recorded in DECISIONS.md.
 
 ### 6 Tabs and private tabs

@@ -2,6 +2,13 @@
 
 Numbered, never dated. Dates live in TRACK.md.
 
+## 16
+- Built: gate screen now says how to update WebView and has an Open Play Store button (decision 34); version 0.0.8. Not run through CI or on a device; the screen cannot be shown on a current phone. Phase 2 marked complete; gate message and Android 10 start moved to the Phase 5 launch test.
+- Verified: on Android 10 and higher WebView is the separate app `com.google.android.webview` and Chrome cannot provide it (Chromium WebView documentation). Not verified: how the Play Store handles the link on every phone.
+- Decisions: 34.
+- Engine: `androidx.webkit` 1.18.0. APK size: 0.0.8 not read.
+- Next start: owner approves the revised targets and Phase 3.
+
 ## 15
 - Measured: 0.0.7 on moto g34 5G (Android 15) from one screen recording: three cold starts, 0.51 to 0.60 s from first launch frame to page; scroll compared with a reference browser on the same page: both median 16.8 ms, no gap over 34 ms during fast motion in either. Method and limits in ROADMAP Quality targets.
 - Decisions: none. Targets proposed, not set.

@@ -178,3 +178,8 @@ WebView settings verified: mixed content defaults to never-allow for apps target
 
 ## 33. Repository name
 Rule: the repository is `g-c-3/weber`. The update check (Phase 3) uses `https://api.github.com/repos/g-c-3/weber/releases/latest`. The old name redirects only while no new repository takes it; none is created. The Gradle project name stays `Gecko` (internal, never shown).
+
+## 34. Gate screen links to WebView in the Play Store
+Rule: when the launch gate (28) is unmet, the screen shows what to do and one button that opens `https://play.google.com/store/apps/details?id=com.google.android.webview`. On Android 10 and higher WebView is the separate Android System WebView app, and Chrome can no longer provide it (Chromium WebView documentation).
+The button is an intent on the user's tap. Ardour opens no connection and sends nothing; the Play Store or browser makes the request. Not a third app-originated connection (IN-APP UPDATE), recorded here so it is not mistaken for one.
+Phones without Play Store updates get the text only: update through the phone maker's store or system update.
