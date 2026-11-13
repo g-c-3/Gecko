@@ -2,6 +2,13 @@
 
 Numbered, never dated. Dates live in TRACK.md.
 
+## 8
+- Built: Phase 2 on GeckoView: engine pinned `159.0.20261102144711`, adapter, one page loads on device (DP1 passed, releases 0.0.4 and 0.0.5). Measured: arm64 188 MB uncompressed, 91.2 MB with compressed libraries; universal 507 MB, 237 MB. Then the engine changed to system WebView (decision 26); nothing of it built yet.
+- Fixed: missing checksums (bootstrap rerun); compileSdk 36 to 37.2 and Kotlin 2.2 to 2.4.20 override, both GeckoView requirements; release notes engine line read "none".
+- Decisions: 26 to 31. Only Phase 2 (WebView) approved.
+- Engine: none pinned for WebView. `androidx.webkit` version not yet chosen. GeckoView `159.0.20261102144711` is in 0.0.4 and 0.0.5 only.
+- Next start: Phase 2 per ROADMAP 2: verify and pin `androidx.webkit`; strip GeckoView; minSdk 29; manifest opt-outs; launch gate; adapter; one APK in CI; regenerate checksums; measure size and start-up. Open: DP0 on 0.0.2; DP9 (icon); DP13; approval of the second connection wording is in the instructions update; optional repo rename (the name `Gecko` stays in the updater URL until decided).
+
 ## 7
 - Built: no code. Product discussion concluded: Spaces (six, up to ten), second approved connection (filter-list updates), feature plan with phases 11 to 13, Basic and Advanced settings. Docs updated.
 - Fixed: engine candidate corrected. Stable is 159.0.x; 160.0 is beta, so session 5 and 6 entries naming `160.0.20261104181552` are superseded (decision 24).
