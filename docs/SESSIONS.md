@@ -2,6 +2,13 @@
 
 Numbered, never dated. Dates live in TRACK.md.
 
+## 10
+- Built: no code. Docs read; file tree and INDEX ranges agree; tags v0.0.1 to v0.0.5 match `version.properties` (0.0.5). Doc sizes: ROADMAP 10.5 KB, TRACK 1.4 KB, SESSIONS 5.6 KB, DECISIONS 16.3 KB; all under 60 KB.
+- Verified: `androidx.webkit` 1.18.0 still newest stable (release notes page); 1.19.0-alpha01 not used. Renderer-gone handling recorded in ROADMAP 2. Not verified: `WebSettings` calls, `getCurrentWebViewPackage` signature, license, size cost, compileSdk.
+- Decisions: none.
+- Engine: none pinned in the repo (GeckoView `159.0.20261102144711` still in 0.0.5); target `androidx.webkit` 1.18.0. APK size: no new build; 0.0.5 arm64 91.2 MB, universal 237 MB.
+- Next start: Phase 2 per ROADMAP 2: close the four open verification items, then deliver the build files in one commit order. Open: DP0 on 0.0.2, DP9, DP13.
+
 ## 9
 - Built: no code. Docs read; file tree and INDEX ranges agree; tags v0.0.1 to v0.0.5 match `version.properties` (0.0.5). Doc sizes all under 60 KB.
 - Verified: newest stable `androidx.webkit` is 1.18.0 (developer.android.com release notes); 1.19.0-alpha01 not used. Profile API forms, `setProfile` ordering rule and `MULTI_PROFILE` flag recorded in ROADMAP 2; the gate uses the run-time flag, no WebView version claimed. Not verified: `WebSettings` calls, renderer-gone callback, license, size cost.
