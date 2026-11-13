@@ -175,3 +175,6 @@ Launch gate (amends 28): no minimum WebView version number is claimed. The gate 
 Phase 2 binds the Default profile. Named Space profiles wait for Phase 12, after the profile-name rules are verified.
 Code shrinking (R8) is not enabled until the first size measurement.
 WebView settings verified: mixed content defaults to never-allow for apps targeting API 21 and higher (platform source); file-URL access defaults false since API 16, universal access deprecated from API 30 (developer.android.com, unsafe file inclusion). All set explicitly.
+
+## 33. Repository name
+Rule: the repository is `g-c-3/weber`. The update check (Phase 3) uses `https://api.github.com/repos/g-c-3/weber/releases/latest`. The old name redirects only while no new repository takes it; none is created. The Gradle project name stays `Gecko` (internal, never shown).

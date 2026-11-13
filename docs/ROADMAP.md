@@ -37,7 +37,7 @@ Settings (decision 20): basic options by default; an Advanced section holds the 
 - Launcher icon shipped early as 0.0.3 (decision 19); see Phase 9.
 
 ### 2 Hello WebView (approved)
-- State: build files for 0.0.6 delivered in session 12 (WebView, one APK, gate, adapter; not yet run through CI or on a device). Releases 0.0.4 and 0.0.5 run GeckoView `159.0.20261102144711` (decision 24, superseded). DP1 passed on both: a page loads, below the status bar. Sizes: arm64 91.2 MB, universal 237 MB.
+- State: release 0.0.6 built green and runs on device (WebView, one APK, gate, adapter). APK 2.88 MB (release page). Releases 0.0.4 and 0.0.5 run GeckoView `159.0.20261102144711` (decision 24, superseded). DP1 passed on both: a page loads, below the status bar. Sizes: arm64 91.2 MB, universal 237 MB.
 - Engine is now system WebView (decision 26). Remove from the repo: GeckoView dependency and `libs.versions.toml` entry, Mozilla Maven in `settings.gradle.kts`, Kotlin 2.4.20 classpath override in the root build file, compileSdk 37.2 and `useLegacyPackaging` in `app/build.gradle.kts`. Let the build decide whether `androidx.webkit` needs any of them.
 - `androidx.webkit` verified on developer.android.com (session 9): stable 1.18.0; 1.19.0-alpha01 is alpha and not used. Pin 1.18.0 in `libs.versions.toml`; record its license (decision 11), its size cost and the compileSdk it needs from the build.
 - API forms verified (session 9): `ProfileStore.getInstance()` with `getOrCreateProfile(name)`, `deleteProfile(name)`, `getAllProfileNames()`; `WebViewCompat.setProfile(webView, name)` and `getProfile(webView)`. All behind `WebViewFeature.MULTI_PROFILE`; without it they throw `UnsupportedOperationException`. `Profile.DEFAULT_PROFILE_NAME` is "Default". `WebViewBuilder` is experimental: not used.
@@ -56,7 +56,8 @@ Settings (decision 20): basic options by default; an Advanced section holds the 
 - CI: one APK `Ardour-X.Y.Z.apk`; versionCode D = 1 (decision 27); release notes line for the WebView requirement; regenerate `verification-metadata.xml` with `verification-bootstrap`, commit, then build.
 - Measure on device and report in the session entry: APK size, cold start to first page, scroll smoothness. Set Quality targets from it.
 - Order after delivery: commit the files (build turns red on checksums, expected), run `verification-bootstrap`, commit the metadata, build green, release 0.0.6.
-- DP13: first WebView build loads a page; gate message checked if possible; size and start-up read.
+- DP13: passed in part: 0.0.6 loads example.com and a followed link inside the app, below the status bar. Gate message not checked; start-up and scroll not yet measured.
+- DP14: status-bar clock and icons are light on a light page and hard to read (owner screenshots). Fix: dark icons on a light bar; verify the API form first.
 
 ### 3 Settings screen and in-app update
 - Settings screen: basic list plus Advanced section (decision 20); "Check for updates" (sideload only). About shows the app version and the phone's WebView version.
@@ -134,7 +135,7 @@ Settings (decision 20): basic options by default; an Advanced section holds the 
 - DP12: customisation on device.
 
 ### Quality targets
-- Size: about 5 MB for the APK (decision 30); first WebView build confirms or corrects it. Each dependency states its size cost.
+- Size: 2.88 MB measured at 0.0.6 (release page), under the 5 MB aim of decision 30; target set after the shrinking decision. Each dependency states its size cost.
 - Start-up and frame rate: targets set after the Phase 2 measurement; re-measured every phase on device.
 - Visual quality: custom-drawn views and spring motion; judged on device by the owner each phase.
 

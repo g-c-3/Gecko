@@ -16,3 +16,4 @@ Maps session, decision and roadmap phase to a date. Append only; never edit a pa
 | 10 | none | 2 (verification) | 2026-11-13 | Docs read; `androidx.webkit` 1.18.0 reconfirmed; renderer-gone handling verified; docs only |
 | 11 | none | 2 (verification) | 2026-11-13 | Docs read; `androidx.webkit` 1.18.0 reconfirmed; WebView package call and file-access default verified; docs only |
 | 12 | 32 | 2 (build files) | 2026-11-13 | WebView build files for 0.0.6 delivered; `androidx.webkit` 1.18.0 adopted; not yet built |
+| 13 | 33 | 2 (device check) | 2026-11-13 | 0.0.6 released and runs; APK 2.88 MB; repo renamed to weber |

@@ -2,6 +2,13 @@
 
 Numbered, never dated. Dates live in TRACK.md.
 
+## 13
+- Built: nothing in code. Owner checked 0.0.6: build #47 green after bootstrap, release 0.0.6 published, APK 2.88 MB, page and a followed link load on device (DP13 in part). Repo renamed to `g-c-3/weber`; old name redirects.
+- Found: status-bar icons are light on a light page (DP14). ARCHITECTURE.md still named the old repo in the update URL; fixed.
+- Decisions: 33.
+- Engine: `androidx.webkit` 1.18.0. APK size 2.88 MB.
+- Next start: DP14 fix (verify API form), then start-up and scroll measurement; Phase 3 needs approval. Instructions text still names the old repo in its read URLs.
+
 ## 12
 - Built: Phase 2 build files, not run through CI or on a device: `androidx.webkit` 1.18.0 pinned, GeckoView and its workarounds removed, minSdk 29, manifest opt-outs, launch gate, one adapter (Default profile, settings, renderer-gone handling), one APK `Ardour-X.Y.Z.apk` (versionCode D = 1), release notes line, version 0.0.6.
 - Verified: 1.18.0 newest stable (release notes, 21 October 2026); Apache 2.0; mixed-content and file-URL defaults. Docs, tags v0.0.1 to v0.0.5 and INDEX ranges agree; doc sizes ROADMAP 12.3 KB, TRACK 1.7 KB, SESSIONS 7.4 KB, DECISIONS 16.3 KB. Not verified: size cost, compileSdk, profile-name rules.
