@@ -25,7 +25,7 @@ object EngineAdapter {
         val pkg = WebViewCompat.getCurrentWebViewPackage(context)
         val ok = pkg != null && WebViewFeature.isFeatureSupported(WebViewFeature.MULTI_PROFILE)
         return if (ok) null else
-            "Ardour needs a newer Android System WebView. Update it in the Play Store, then open Ardour again."
+            "Ardour needs a newer Android System WebView.\n\nOpen it in the Play Store, tap Update, then open Ardour again.\n\nNo Play Store? Update WebView through your phone maker's app store or system update."
     }
 
     @SuppressLint("SetJavaScriptEnabled")
