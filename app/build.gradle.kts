@@ -29,9 +29,20 @@ android {
         targetSdk {
             version = release(36)
         }
-        // D = 1: sideload APK (DECISIONS.md 27)
-        versionCode = baseCode + 1
         versionName = "$verMajor.$verMinor.$verPatch"
+    }
+
+    // D in versionCode: 1 sideload APK, 0 Play bundle (DECISIONS.md 8, 27).
+    flavorDimensions += "store"
+    productFlavors {
+        create("sideload") {
+            dimension = "store"
+            versionCode = baseCode + 1
+        }
+        create("play") {
+            dimension = "store"
+            versionCode = baseCode
+        }
     }
 
     // Signing material comes from the release job's environment only (DECISIONS.md 6, 13, 15).
