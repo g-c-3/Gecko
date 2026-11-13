@@ -4,10 +4,10 @@ Numbered, never dated. Dates live in TRACK.md.
 
 ## 9
 - Built: no code. Docs read; file tree and INDEX ranges agree; tags v0.0.1 to v0.0.5 match `version.properties` (0.0.5). Doc sizes all under 60 KB.
-- Verified: newest stable `androidx.webkit` is 1.18.0 (developer.android.com release notes); 1.19.0-alpha01 not used. Profile API forms and `MULTI_PROFILE` flag recorded in ROADMAP 2. Not verified: minimum WebView version, `setProfile` ordering rule, license, size cost.
+- Verified: newest stable `androidx.webkit` is 1.18.0 (developer.android.com release notes); 1.19.0-alpha01 not used. Profile API forms, `setProfile` ordering rule and `MULTI_PROFILE` flag recorded in ROADMAP 2; the gate uses the run-time flag, no WebView version claimed. Not verified: `WebSettings` calls, renderer-gone callback, license, size cost.
 - Decisions: none.
 - Engine: none pinned in the repo (GeckoView `159.0.20261102144711` still in 0.0.5); target `androidx.webkit` 1.18.0. APK size: no new build; 0.0.5 arm64 91.2 MB, universal 237 MB.
-- Next start: Phase 2 per ROADMAP 2: close the unverified items, then deliver the build files in one commit order. Open: DP0 on 0.0.2, DP9, DP13.
+- Next start: Phase 2 per ROADMAP 2: close the remaining unverified items, then deliver the build files in one commit order. Open: DP0 on 0.0.2, DP9, DP13.
 
 ## 8
 - Built: Phase 2 on GeckoView: engine pinned `159.0.20261102144711`, adapter, one page loads on device (DP1 passed, releases 0.0.4 and 0.0.5). Measured: arm64 188 MB uncompressed, 91.2 MB with compressed libraries; universal 507 MB, 237 MB. Then the engine changed to system WebView (decision 26); nothing of it built yet.

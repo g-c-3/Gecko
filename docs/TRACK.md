@@ -12,4 +12,4 @@ Maps session, decision and roadmap phase to a date. Append only; never edit a pa
 | 6 | 19 | 9 (icon, early) | 2026-11-12 | Launcher icon and version 0.0.3 delivered; docs updated |
 | 7 | 20-25 | 2 (approved), 11-13 (planned) | 2026-11-13 | Product plan, Spaces, filter-list connection approved; engine candidate corrected to 159.0.x; docs updated |
 | 8 | 26-31 | 2 (GeckoView step done; engine changed to WebView) | 2026-11-13 | Releases 0.0.4 and 0.0.5 on GeckoView, sizes measured; engine, one APK, minimum phone, privacy, UI toolkit and feature plan decided; docs and instructions updated |
-| 9 | none | 2 (verification) | 2026-11-13 | Docs read; `androidx.webkit` 1.18.0 and profile API forms verified; docs only |
+| 9 | none | 2 (verification) | 2026-11-13 | Docs read; `androidx.webkit` 1.18.0 and profile API forms and `setProfile` ordering verified; docs only |
