@@ -8,6 +8,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="Ardour"
         android:theme="@android:style/Theme.Material.Light.NoActionBar">
+        <!-- Safe Browsing lookups and diagnostic reporting off (DECISIONS.md 29). -->
+        <meta-data
+            android:name="android.webkit.WebView.EnableSafeBrowsing"
+            android:value="false" />
+        <meta-data
+            android:name="android.webkit.WebView.MetricsOptOut"
+            android:value="true" />
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboard|keyboardHidden|navigation|uiMode|density"
