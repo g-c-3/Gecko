@@ -2,6 +2,13 @@
 
 Numbered, never dated. Dates live in TRACK.md.
 
+## 14
+- Built: DP14 fix, not run through CI or on a device: `themes.xml` with light status and navigation bar icons, manifest uses it, version 0.0.7. No new dependency.
+- Verified: `windowLightStatusBar` needs API 23, `windowLightNavigationBar` API 27 (platform reference mirrors); both below minSdk 29. Not verified: behaviour under edge-to-edge on device.
+- Decisions: none.
+- Engine: `androidx.webkit` 1.18.0 (unchanged; newest stable not rechecked this turn). APK size: 2.88 MB at 0.0.6.
+- Next start: owner confirms DP14; then start-up and scroll measurement; Phase 3 needs approval. Icons stay dark on dark pages until Phase 9 theming.
+
 ## 13
 - Built: nothing in code. Owner checked 0.0.6: build #47 green after bootstrap, release 0.0.6 published, APK 2.88 MB, page and a followed link load on device (DP13 in part). Repo renamed to `g-c-3/weber`; old name redirects.
 - Found: status-bar icons are light on a light page (DP14). ARCHITECTURE.md still named the old repo in the update URL; fixed.

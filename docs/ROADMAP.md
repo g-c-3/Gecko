@@ -57,7 +57,7 @@ Settings (decision 20): basic options by default; an Advanced section holds the 
 - Measure on device and report in the session entry: APK size, cold start to first page, scroll smoothness. Set Quality targets from it.
 - Order after delivery: commit the files (build turns red on checksums, expected), run `verification-bootstrap`, commit the metadata, build green, release 0.0.6.
 - DP13: passed in part: 0.0.6 loads example.com and a followed link inside the app, below the status bar. Gate message not checked; start-up and scroll not yet measured.
-- DP14: status-bar clock and icons are light on a light page and hard to read (owner screenshots). Fix: dark icons on a light bar; verify the API form first.
+- DP14: status-bar and navigation-bar icons were light on a light page. Fix in 0.0.7: light-bar theme attributes (platform API 23 and 27). Not run on a device; confirm the clock and icons are dark.
 
 ### 3 Settings screen and in-app update
 - Settings screen: basic list plus Advanced section (decision 20); "Check for updates" (sideload only). About shows the app version and the phone's WebView version.
