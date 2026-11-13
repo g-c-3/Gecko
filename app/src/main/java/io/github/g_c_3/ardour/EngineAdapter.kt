@@ -1,44 +1,67 @@
 package io.github.g_c_3.ardour
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
-import org.mozilla.geckoview.GeckoPreferenceController
-import org.mozilla.geckoview.GeckoRuntime
-import org.mozilla.geckoview.GeckoSession
-import org.mozilla.geckoview.GeckoView
+import android.view.ViewGroup
+import android.webkit.RenderProcessGoneDetail
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import androidx.webkit.Profile
+import androidx.webkit.WebViewCompat
+import androidx.webkit.WebViewFeature
 
-// The only file that calls GeckoView (DECISIONS.md 3). An engine API change is fixed here.
+// The only file that calls android.webkit or androidx.webkit (DECISIONS.md 26). An engine API change is fixed here.
 object EngineAdapter {
     // Placeholder until the address bar (Phase 4).
     private const val START_PAGE = "https://example.com"
 
-    // Telemetry and data upload off (DECISIONS.md 2).
-    private val OFF_PREFS = listOf(
-        "datareporting.healthreport.uploadEnabled",
-        "toolkit.telemetry.enabled",
-    )
+    private var webView: WebView? = null
 
-    private var runtime: GeckoRuntime? = null
-    private var session: GeckoSession? = null
+    // Launch gate (DECISIONS.md 28): null when the engine meets the app's needs, else the text to show.
+    // No WebView version number is claimed; the check is the package and the profile feature at run time.
+    fun launchGateMessage(context: Context): String? {
+        val pkg = WebViewCompat.getCurrentWebViewPackage(context)
+        val ok = pkg != null && WebViewFeature.isFeatureSupported(WebViewFeature.MULTI_PROFILE)
+        return if (ok) null else
+            "Ardour needs a newer Android System WebView. Update it in the Play Store, then open Ardour again."
+    }
 
-    fun createView(context: Context): View {
-        val rt = runtime ?: GeckoRuntime.create(context.applicationContext).also {
-            runtime = it
-            for (pref in OFF_PREFS) {
-                GeckoPreferenceController.setGeckoPref(
-                    pref,
-                    false,
-                    GeckoPreferenceController.PREF_BRANCH_USER,
-                )
+    @SuppressLint("SetJavaScriptEnabled")
+    @Suppress("DEPRECATION")
+    fun createView(context: Context, onEngineLost: () -> Unit): View {
+        val view = WebView(context)
+        // Profile first: no other call on the view before it (ROADMAP 2). Named Space profiles arrive in Phase 12.
+        WebViewCompat.setProfile(view, Profile.DEFAULT_PROFILE_NAME)
+        view.settings.apply {
+            javaScriptEnabled = true
+            allowFileAccess = false
+            allowContentAccess = false
+            allowFileAccessFromFileURLs = false
+            allowUniversalAccessFromFileURLs = false
+            mixedContentMode = WebSettings.MIXED_CONTENT_NEVER_ALLOW
+        }
+        view.webViewClient = object : WebViewClient() {
+            // Renderer ended: drop the view and let the app build a new one; returning false would end the app.
+            override fun onRenderProcessGone(view: WebView, detail: RenderProcessGoneDetail): Boolean {
+                (view.parent as? ViewGroup)?.removeView(view)
+                view.destroy()
+                if (webView === view) webView = null
+                onEngineLost()
+                return true
             }
         }
-        val s = session ?: GeckoSession().also {
-            // Workaround for Mozilla bug 1758212 (quick start).
-            it.setContentDelegate(object : GeckoSession.ContentDelegate {})
-            it.open(rt)
-            it.loadUri(START_PAGE)
-            session = it
+        view.loadUrl(START_PAGE)
+        webView = view
+        return view
+    }
+
+    fun destroy() {
+        webView?.let {
+            (it.parent as? ViewGroup)?.removeView(it)
+            it.destroy()
         }
-        return GeckoView(context).also { it.setSession(s) }
+        webView = null
     }
 }
