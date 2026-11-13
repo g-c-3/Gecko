@@ -18,3 +18,4 @@ Maps session, decision and roadmap phase to a date. Append only; never edit a pa
 | 12 | 32 | 2 (build files) | 2026-11-13 | WebView build files for 0.0.6 delivered; `androidx.webkit` 1.18.0 adopted; not yet built |
 | 13 | 33 | 2 (device check) | 2026-11-13 | 0.0.6 released and runs; APK 2.88 MB; repo renamed to weber |
 | 14 | none | 2 (DP14) | 2026-11-13 | Status-bar icon fix for 0.0.7 delivered; not yet built |
+| 15 | none | 2 (measurement) | 2026-11-14 | Start-up and scroll measured from a screen recording; targets proposed |

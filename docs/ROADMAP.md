@@ -56,8 +56,8 @@ Settings (decision 20): basic options by default; an Advanced section holds the 
 - CI: one APK `Ardour-X.Y.Z.apk`; versionCode D = 1 (decision 27); release notes line for the WebView requirement; regenerate `verification-metadata.xml` with `verification-bootstrap`, commit, then build.
 - Measure on device and report in the session entry: APK size, cold start to first page, scroll smoothness. Set Quality targets from it.
 - Order after delivery: commit the files (build turns red on checksums, expected), run `verification-bootstrap`, commit the metadata, build green, release 0.0.6.
-- DP13: passed in part: 0.0.6 loads example.com and a followed link inside the app, below the status bar. Gate message not checked; start-up and scroll not yet measured.
-- DP14: status-bar and navigation-bar icons were light on a light page. Fix in 0.0.7: light-bar theme attributes (platform API 23 and 27). Not run on a device; confirm the clock and icons are dark.
+- DP13: passed on 0.0.7 except the gate message (cannot be triggered on a current WebView). Page and link load; cold start measured (below).
+- DP14: passed on 0.0.7 (owner screenshot): clock and status icons dark and readable. Navigation bar not visible in the screenshot, not confirmed.
 
 ### 3 Settings screen and in-app update
 - Settings screen: basic list plus Advanced section (decision 20); "Check for updates" (sideload only). About shows the app version and the phone's WebView version.
@@ -136,7 +136,7 @@ Settings (decision 20): basic options by default; an Advanced section holds the 
 
 ### Quality targets
 - Size: 2.88 MB measured at 0.0.6 (release page), under the 5 MB aim of decision 30; target set after the shrinking decision. Each dependency states its size cost.
-- Start-up and frame rate: targets set after the Phase 2 measurement; re-measured every phase on device.
+- Start-up and frame rate: measured session 15 on moto g34 5G, Android 15, 0.0.7, screen recording (accuracy about one video frame, 17 ms). Cold start, first launch frame to first page: 0.51, 0.56, 0.60 s (mean 0.56 s); example.com, network and cache unknown. Scroll, same IANA page, same method: Ardour 0.0.7 median frame gap 16.8 ms (5 flicks, 5 of 161 gaps over 34 ms; two later recordings, probably Ardour: 16.9 and 16.8 ms); reference browser 16.8 ms (6 flicks, 5 of 255 over 34 ms). No gap over 34 ms during fast motion in any recording; every longer gap sits where motion slows or the finger changes direction. Ardour matches the reference. Proposed targets (revised, pending approval): cold start to first page 0.50 s or less, mean of 3, and never above 0.60 s in any phase without a decision entry; no white flash, Ardour's own themed window shown before the page; median scroll gap 17 ms or less with no mid-flick gap over 34 ms in 10 flicks, and never worse than the same page in a reference browser on the same phone; APK 5 MB or less through Phase 8. Re-measured every phase.
 - Visual quality: custom-drawn views and spring motion; judged on device by the owner each phase.
 
 ### Later (each needs its own approval)

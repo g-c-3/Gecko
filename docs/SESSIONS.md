@@ -2,6 +2,13 @@
 
 Numbered, never dated. Dates live in TRACK.md.
 
+## 15
+- Measured: 0.0.7 on moto g34 5G (Android 15) from one screen recording: three cold starts, 0.51 to 0.60 s from first launch frame to page; scroll compared with a reference browser on the same page: both median 16.8 ms, no gap over 34 ms during fast motion in either. Method and limits in ROADMAP Quality targets.
+- Decisions: none. Targets proposed, not set.
+- Engine: `androidx.webkit` 1.18.0. APK size: 2.88 MB at 0.0.6; 0.0.7 not read.
+- Not measured: WebView version, memory, a second page, the gate message.
+- Next start: owner approves the targets and Phase 3; then Phase 3.
+
 ## 14
 - Built: DP14 fix, not run through CI or on a device: `themes.xml` with light status and navigation bar icons, manifest uses it, version 0.0.7. No new dependency.
 - Verified: `windowLightStatusBar` needs API 23, `windowLightNavigationBar` API 27 (platform reference mirrors); both below minSdk 29. Not verified: behaviour under edge-to-edge on device.
