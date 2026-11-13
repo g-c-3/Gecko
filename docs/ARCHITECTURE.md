@@ -1,6 +1,6 @@
 # Architecture
 
-Status: releases up to 0.0.5 run GeckoView. Phase 2 moves the repo to WebView (decision 26); sections below describe the target unless marked.
+Status: releases up to 0.0.5 run GeckoView. The 0.0.6 files move the repo to WebView (decisions 26, 32); not yet built.
 
 ## Layers
 - `app/`: Kotlin Android module. Plain Android views, custom drawn (DECISIONS.md 30). No Compose, no Mozilla components, no native code (27).
@@ -43,7 +43,7 @@ Before changing permissions, certificates, content blocking or the manifest:
 
 ## Toolchain
 Gradle 9.9.1, AGP 9.5.1, JDK 17 (DECISIONS.md 12). Exact pins in `gradle/wrapper/gradle-wrapper.properties` and `gradle/libs.versions.toml`.
-In the repo at 0.0.5, added for GeckoView and removed in Phase 2: Kotlin 2.4.20 classpath override (root build file), compileSdk 37.2, `useLegacyPackaging` (26).
+The GeckoView additions (Kotlin 2.4.20 override, compileSdk 37.2, `useLegacyPackaging`) are removed in the 0.0.6 files; compileSdk 36 is provisional (32).
 `gradlew` loses its executable bit when uploaded through the GitHub web UI; workflows run it as `sh gradlew` or after `chmod +x`.
 
 ## Build and CI
@@ -51,7 +51,7 @@ In the repo at 0.0.5, added for GeckoView and removed in Phase 2: Kotlin 2.4.20 
 - `build-android.yml`, jobs:
   - `build`: debug APK on every push, pull request and manual run.
   - `plan`: on push to `main`; reads `version.properties`; releases only if tag `vX.Y.Z` does not exist.
-  - `release`: after `build` and `plan`; signs with repository secrets `KEYSTORE_BASE64`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`; verifies the certificate SHA-256 (DECISIONS.md 15); publishes the release and tag (DECISIONS.md 16). Release notes read the engine line from `libs.versions.toml` at 0.0.5; Phase 2 changes it to the WebView requirement and to one APK (27).
+  - `release`: after `build` and `plan`; signs with repository secrets `KEYSTORE_BASE64`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`; verifies the certificate SHA-256 (DECISIONS.md 15); publishes the release and tag (DECISIONS.md 16). One APK `Ardour-X.Y.Z.apk` (27); release notes carry the WebView requirement and the `androidx.webkit` pin read from `libs.versions.toml`.
 - Signing in Gradle reads `KEYSTORE_PATH`, `KEYSTORE_PASSWORD`, `KEY_ALIAS` from the environment; without them release APKs stay unsigned.
 - `verification-bootstrap.yml`: manual; writes `verification-metadata.xml` as an artifact (checksums only). Rerun and recommit when dependencies change. A new dependency turns the next build red until then.
 - `dependency-update.yml`: scheduled; pull request that changes the `androidx.webkit` pin, bumps the patch version, regenerates verification metadata, builds. Not yet created (Phase 5).

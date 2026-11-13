@@ -2,6 +2,13 @@
 
 Numbered, never dated. Dates live in TRACK.md.
 
+## 12
+- Built: Phase 2 build files, not run through CI or on a device: `androidx.webkit` 1.18.0 pinned, GeckoView and its workarounds removed, minSdk 29, manifest opt-outs, launch gate, one adapter (Default profile, settings, renderer-gone handling), one APK `Ardour-X.Y.Z.apk` (versionCode D = 1), release notes line, version 0.0.6.
+- Verified: 1.18.0 newest stable (release notes, 21 October 2026); Apache 2.0; mixed-content and file-URL defaults. Docs, tags v0.0.1 to v0.0.5 and INDEX ranges agree; doc sizes ROADMAP 12.3 KB, TRACK 1.7 KB, SESSIONS 7.4 KB, DECISIONS 16.3 KB. Not verified: size cost, compileSdk, profile-name rules.
+- Decisions: 32.
+- Engine: `androidx.webkit` 1.18.0 (in the delivered files); GeckoView stays in releases 0.0.4 and 0.0.5. APK size: no new build; 0.0.5 arm64 91.2 MB, universal 237 MB.
+- Next start: owner commits the files, runs `verification-bootstrap`, commits the metadata; read the first build's size and any compileSdk error. Then DP13, and on-device start-up and scroll measurement. Open: DP0 on 0.0.2, DP9.
+
 ## 11
 - Built: no code. Docs read; file tree and INDEX ranges agree; tags v0.0.1 to v0.0.5 match `version.properties` (0.0.5). Doc sizes: ROADMAP 11.1 KB, TRACK 1.5 KB, SESSIONS 6.5 KB, DECISIONS 16.3 KB; all under 60 KB.
 - Verified: `androidx.webkit` 1.18.0 still newest stable (release notes page, last updated 4 November); 1.19.0-alpha01 not used. `getCurrentWebViewPackage(context)` form, manifest meta-data names, `setAllowFileAccess` default recorded in ROADMAP 2. Not verified: mixed-content and file-URL settings, license, size cost, compileSdk.

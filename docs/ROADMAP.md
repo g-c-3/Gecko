@@ -37,7 +37,7 @@ Settings (decision 20): basic options by default; an Advanced section holds the 
 - Launcher icon shipped early as 0.0.3 (decision 19); see Phase 9.
 
 ### 2 Hello WebView (approved)
-- State: releases 0.0.4 and 0.0.5 run GeckoView `159.0.20261102144711` (decision 24, superseded). DP1 passed on both: a page loads, below the status bar. Sizes: arm64 91.2 MB, universal 237 MB.
+- State: build files for 0.0.6 delivered in session 12 (WebView, one APK, gate, adapter; not yet run through CI or on a device). Releases 0.0.4 and 0.0.5 run GeckoView `159.0.20261102144711` (decision 24, superseded). DP1 passed on both: a page loads, below the status bar. Sizes: arm64 91.2 MB, universal 237 MB.
 - Engine is now system WebView (decision 26). Remove from the repo: GeckoView dependency and `libs.versions.toml` entry, Mozilla Maven in `settings.gradle.kts`, Kotlin 2.4.20 classpath override in the root build file, compileSdk 37.2 and `useLegacyPackaging` in `app/build.gradle.kts`. Let the build decide whether `androidx.webkit` needs any of them.
 - `androidx.webkit` verified on developer.android.com (session 9): stable 1.18.0; 1.19.0-alpha01 is alpha and not used. Pin 1.18.0 in `libs.versions.toml`; record its license (decision 11), its size cost and the compileSdk it needs from the build.
 - API forms verified (session 9): `ProfileStore.getInstance()` with `getOrCreateProfile(name)`, `deleteProfile(name)`, `getAllProfileNames()`; `WebViewCompat.setProfile(webView, name)` and `getProfile(webView)`. All behind `WebViewFeature.MULTI_PROFILE`; without it they throw `UnsupportedOperationException`. `Profile.DEFAULT_PROFILE_NAME` is "Default". `WebViewBuilder` is experimental: not used.
@@ -47,7 +47,7 @@ Settings (decision 20): basic options by default; an Advanced section holds the 
 - Verified (session 11, "Manage WebView objects" guide): `WebViewCompat.getCurrentWebViewPackage(context)` returns a `PackageInfo`; the guide reads `versionName`. The platform method returns null when no WebView package exists; the gate treats null as unmet. `android.webkit.WebView.EnableSafeBrowsing` false and `android.webkit.WebView.MetricsOptOut` true confirmed as the manifest meta-data names.
 - Verified (session 11, Android security guide "Cross-app scripting"): `setAllowFileAccess` defaults to true on API 29 and lower and false on 30 and higher; the guide sets it and `setAllowContentAccess` to false explicitly. Ardour sets both to false explicitly.
 - Library history (session 11, release notes): minSdk 24 since 1.16.0; 1.16.0-alpha03 notes say the library keeps compileSdk 33; the required compileSdk for 1.18.0 is not stated. The build decides.
-- Still to verify before any code: `setMixedContentMode` default and `MIXED_CONTENT_NEVER_ALLOW` (current reference text not obtained; only a 2016 archive read), `setAllowUniversalAccessFromFileURLs` and `setAllowFileAccessFromFileURLs` defaults, `setJavaScriptEnabled`; the Apache 2.0 license; the library's size cost and required compileSdk (from the first build).
+- Verified (session 12): mixed-content default and file-URL defaults (decision 32); `androidx.webkit` license Apache 2.0 (decision 32); newest stable still 1.18.0. Not verified: size cost and required compileSdk (first build), profile-name rules, `setJavaScriptEnabled` default read only from a third-party page.
 - Method note: whole-page fetches of the `WebSettings` reference and of the release notes return mostly navigation text or very long text. Search for the named method and read the snippet; fetch a page only when the method name is in the search result.
 - minSdk 29 (decision 28). Manifest: INTERNET (present), Safe Browsing off and metrics opt-out meta-data (decision 29), `allowBackup=false` (confirm).
 - Launch gate (decision 28): WebView package version through `WebViewCompat.getCurrentWebViewPackage`; `WebViewFeature.isFeatureSupported` for profiles; full-screen message when unmet. Find the minimum WebView version for the features needed; record it in DECISIONS.md.
@@ -55,6 +55,7 @@ Settings (decision 20): basic options by default; an Advanced section holds the 
 - Space profile: bind one profile before any other call on the WebView; verify the API form and feature flag in the documentation.
 - CI: one APK `Ardour-X.Y.Z.apk`; versionCode D = 1 (decision 27); release notes line for the WebView requirement; regenerate `verification-metadata.xml` with `verification-bootstrap`, commit, then build.
 - Measure on device and report in the session entry: APK size, cold start to first page, scroll smoothness. Set Quality targets from it.
+- Order after delivery: commit the files (build turns red on checksums, expected), run `verification-bootstrap`, commit the metadata, build green, release 0.0.6.
 - DP13: first WebView build loads a page; gate message checked if possible; size and start-up read.
 
 ### 3 Settings screen and in-app update

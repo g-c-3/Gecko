@@ -167,3 +167,11 @@ Built by Ardour: content blocking (request blocking; page-element hiding by scri
 Reduced: fingerprint protection (script level, best effort, off by default); Do Not Track and Global Privacy Control (main-frame headers and a script flag, not a header on every request); private tabs (29); passkeys (verify WebView support before promising).
 Not used: rewriting requests (needs Ardour's own fetch; breaks caching and cookies).
 Amends 23.
+
+## 32. Adoption of `androidx.webkit` 1.18.0 (Phase 2)
+Rule: pinned exactly in `gradle/libs.versions.toml`. Newest stable per developer.android.com release notes (1.18.0, 21 October 2026); no stable above it seen. License: Apache 2.0 per Maven metadata; confirms 11. The library brings androidx annotation and core; size cost is read from the first build.
+compileSdk 36 is provisional; the build shows whether the library needs more.
+Launch gate (amends 28): no minimum WebView version number is claimed. The gate is the run-time check that a WebView package exists and `WebViewFeature.MULTI_PROFILE` is supported.
+Phase 2 binds the Default profile. Named Space profiles wait for Phase 12, after the profile-name rules are verified.
+Code shrinking (R8) is not enabled until the first size measurement.
+WebView settings verified: mixed content defaults to never-allow for apps targeting API 21 and higher (platform source); file-URL access defaults false since API 16, universal access deprecated from API 30 (developer.android.com, unsafe file inclusion). All set explicitly.

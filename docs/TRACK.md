@@ -15,3 +15,4 @@ Maps session, decision and roadmap phase to a date. Append only; never edit a pa
 | 9 | none | 2 (verification) | 2026-11-13 | Docs read; `androidx.webkit` 1.18.0 and profile API forms and `setProfile` ordering verified; docs only |
 | 10 | none | 2 (verification) | 2026-11-13 | Docs read; `androidx.webkit` 1.18.0 reconfirmed; renderer-gone handling verified; docs only |
 | 11 | none | 2 (verification) | 2026-11-13 | Docs read; `androidx.webkit` 1.18.0 reconfirmed; WebView package call and file-access default verified; docs only |
+| 12 | 32 | 2 (build files) | 2026-11-13 | WebView build files for 0.0.6 delivered; `androidx.webkit` 1.18.0 adopted; not yet built |
