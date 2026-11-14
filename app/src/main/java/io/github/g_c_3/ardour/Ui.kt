@@ -1,17 +1,24 @@
 package io.github.g_c_3.ardour
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.LinearGradient
+import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Path
+import android.graphics.RadialGradient
 import android.graphics.RectF
+import android.graphics.Shader
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.Interpolator
 import android.widget.LinearLayout
@@ -29,6 +36,7 @@ object Ui {
     val CARD = 0xFFFFFFFF.toInt()
     val LINE = 0xFFE8E6E2.toInt()
     val MUTED = 0xFF646875.toInt()
+    val AMBER = 0xFFF2791A.toInt()
 
     fun dp(context: Context, n: Int): Int = (n * context.resources.displayMetrics.density + 0.5f).toInt()
 
@@ -90,6 +98,21 @@ object Ui {
         layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1)
     }
 
+    // Ink gradient with a faint ember rim and an ember-tinted shadow: the glow marks the primary action.
+    private fun glowPill(context: Context, radiusDp: Int) = GradientDrawable(
+        GradientDrawable.Orientation.TOP_BOTTOM,
+        intArrayOf(0xFF33354A.toInt(), 0xFF1E202B.toInt()),
+    ).apply {
+        cornerRadius = dp(context, radiusDp).toFloat()
+        setStroke(dp(context, 1), 0x40FF6A3D)
+    }
+
+    private fun styleGlow(view: View, elevationDp: Int, glowAlpha: Int) {
+        view.elevation = dp(view.context, elevationDp).toFloat()
+        view.outlineSpotShadowColor = (glowAlpha shl 24) or (EMBER and 0x00FFFFFF)
+        view.outlineAmbientShadowColor = 0x33000000
+    }
+
     fun pillButton(context: Context, text: String) = TextView(context).apply {
         this.text = text
         textSize = 16f
@@ -97,17 +120,14 @@ object Ui {
         setTextColor(0xFFFFFFFF.toInt())
         gravity = Gravity.CENTER
         setPadding(dp(context, 24), dp(context, 15), dp(context, 24), dp(context, 15))
-        background = GradientDrawable().apply {
-            setColor(INK)
-            cornerRadius = dp(context, 28).toFloat()
-        }
-        elevation = dp(context, 3).toFloat()
+        background = glowPill(context, 28)
+        styleGlow(this, 8, 0xB0)
         isClickable = true
         isFocusable = true
         springPress(this)
     }
 
-    // Small pill floating over a page.
+    // Small pill floating over a page: quieter glow.
     fun floatingPill(context: Context, text: String) = TextView(context).apply {
         this.text = text
         textSize = 14f
@@ -115,11 +135,8 @@ object Ui {
         setTextColor(0xFFFFFFFF.toInt())
         gravity = Gravity.CENTER
         setPadding(dp(context, 18), dp(context, 11), dp(context, 18), dp(context, 11))
-        background = GradientDrawable().apply {
-            setColor(0xEB242630.toInt())
-            cornerRadius = dp(context, 24).toFloat()
-        }
-        elevation = dp(context, 6).toFloat()
+        background = glowPill(context, 24)
+        styleGlow(this, 6, 0x80)
         isClickable = true
         isFocusable = true
         springPress(this)
@@ -168,22 +185,123 @@ class SpringInterpolator : Interpolator {
     }
 }
 
+// Slim bar with an ember-to-amber gradient. Determinate: a soft glow rides the leading edge.
+// Indeterminate: a light sweeps along the track while something is being checked.
 class ThinProgress(context: Context) : View(context) {
+    private val barHeight = Ui.dp(context, 4).toFloat()
+    private val glowRadius = Ui.dp(context, 10).toFloat()
     private val track = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Ui.LINE }
-    private val fill = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Ui.EMBER }
+    private val fill = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val glow = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val glowShader = RadialGradient(
+        0f, 0f, glowRadius, intArrayOf(0x80F2791A.toInt(), 0x00F2791A), null, Shader.TileMode.CLAMP,
+    )
+    private val glowMatrix = Matrix()
     private val rect = RectF()
+    private val clip = Path()
+    private var phase = 0.5f
+    private var sweeper: ValueAnimator? = null
+
     var value = 0f
         set(v) {
             field = v.coerceIn(0f, 1f)
             invalidate()
         }
 
+    var indeterminate = false
+        set(v) {
+            field = v
+            if (v) startSweep() else stopSweep()
+            invalidate()
+        }
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        fill.shader = LinearGradient(0f, 0f, w.toFloat(), 0f, Ui.EMBER, Ui.AMBER, Shader.TileMode.CLAMP)
+    }
+
+    private fun startSweep() {
+        if (sweeper != null) return
+        if (!ValueAnimator.areAnimatorsEnabled()) {
+            phase = 0.5f
+            return
+        }
+        sweeper = ValueAnimator.ofFloat(0f, 1f).apply {
+            duration = 1200
+            repeatCount = ValueAnimator.INFINITE
+            interpolator = AccelerateDecelerateInterpolator()
+            addUpdateListener {
+                phase = it.animatedValue as Float
+                invalidate()
+            }
+            start()
+        }
+    }
+
+    private fun stopSweep() {
+        sweeper?.cancel()
+        sweeper = null
+    }
+
+    override fun onDetachedFromWindow() {
+        stopSweep()
+        super.onDetachedFromWindow()
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        if (indeterminate) startSweep()
+    }
+
     override fun onDraw(canvas: Canvas) {
-        val r = height / 2f
-        rect.set(0f, 0f, width.toFloat(), height.toFloat())
+        val w = width.toFloat()
+        val cy = height / 2f
+        val top = cy - barHeight / 2f
+        val bottom = cy + barHeight / 2f
+        val r = barHeight / 2f
+        rect.set(0f, top, w, bottom)
         canvas.drawRoundRect(rect, r, r, track)
-        rect.set(0f, 0f, width * value, height.toFloat())
-        if (value > 0f) canvas.drawRoundRect(rect, r, r, fill)
+        if (indeterminate) {
+            val seg = w * 0.35f
+            val x = -seg + (w + seg) * phase
+            clip.reset()
+            clip.addRoundRect(rect, r, r, Path.Direction.CW)
+            canvas.save()
+            canvas.clipPath(clip)
+            rect.set(x, top, x + seg, bottom)
+            canvas.drawRoundRect(rect, r, r, fill)
+            canvas.restore()
+        } else if (value > 0f) {
+            val end = w * value
+            rect.set(0f, top, end, bottom)
+            canvas.drawRoundRect(rect, r, r, fill)
+            glowMatrix.setTranslate(end, cy)
+            glowShader.setLocalMatrix(glowMatrix)
+            glow.shader = glowShader
+            canvas.drawCircle(end, cy, glowRadius, glow)
+        }
+    }
+}
+
+// Slow breathing light on one element that needs attention; never more than one per screen (DECISIONS.md 40).
+class Pulse(private val view: View) {
+    private val base = view.elevation
+    private var anim: ObjectAnimator? = null
+
+    fun start() {
+        if (anim != null || !ValueAnimator.areAnimatorsEnabled()) return
+        anim = ObjectAnimator.ofFloat(view, View.ELEVATION, base, base + Ui.dp(view.context, 10)).apply {
+            duration = 1300
+            repeatCount = ValueAnimator.INFINITE
+            repeatMode = ValueAnimator.REVERSE
+            interpolator = AccelerateDecelerateInterpolator()
+            start()
+        }
+    }
+
+    fun stop() {
+        anim?.cancel()
+        anim = null
+        view.elevation = base
     }
 }
 
