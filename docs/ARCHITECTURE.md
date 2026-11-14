@@ -18,7 +18,7 @@ Status: releases up to 0.0.5 run GeckoView. The 0.0.6 files move the repo to Web
 ## Network
 Allowed connections:
 1. Pages the user visits.
-2. Update check: one GET to `https://api.github.com/repos/g-c-3/weber/releases/latest`, on button tap only, `sideload` only. The one APK is downloaded over HTTPS from that release, SHA-256 verified against release notes, then handed to the system installer. Nothing sent but the requests.
+2. Update check: one GET to `https://api.github.com/repos/g-c-3/weber/releases/latest`, on button tap only, `sideload` only. The one APK is downloaded over HTTPS from that release, SHA-256 verified against release notes, then handed to the system installer. Nothing sent but the requests. Installed through a `PackageInstaller` session; the user confirms in Android (decision 36).
 3. Filter-list updates (DECISIONS.md 23): lists built into each release; tap button and a scheduled update (at most daily, Wi-Fi only, switch in Settings). Fetched from the GitHub release host only, SHA-256 verified. The host sees the internet address and request time. Not yet built (Phase 8).
 
 The WebView component's own traffic is Google's and outside Ardour's control (29).

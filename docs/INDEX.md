@@ -7,9 +7,9 @@ Pointers only.
 | File | Holds | Range | Older parts |
 |---|---|---|---|
 | ROADMAP.md | Phase checklist, detail, quality targets | Phases 0-13 | none |
-| DECISIONS.md | Numbered decisions | 1-35 | none |
-| SESSIONS.md | Session log | 1-18 | none |
-| TRACK.md | Session/decision/phase to date | Sessions 1-18 | none |
+| DECISIONS.md | Numbered decisions | 1-37 | none |
+| SESSIONS.md | Session log | 1-19 | none |
+| TRACK.md | Session/decision/phase to date | Sessions 1-19 | none |
 | ARCHITECTURE.md | Layers, network, security checks, CI | n/a | none |
 
 ## Standing decisions
@@ -18,7 +18,7 @@ Pointers only.
 |---|---|---|
 | 1 | No secrets in the public repo | DECISIONS.md |
 | 2 | Privacy by default; allowed connections in 2 and 23; amended by 29 | DECISIONS.md |
-| 4 | Version scheme; versionCode formula (D digit in 27) | DECISIONS.md |
+| 4 | Version scheme; versionCode formula (D digit in 27, Y and Z 0 to 9 in 37) | DECISIONS.md |
 | 6 | One signing key, secrets only | DECISIONS.md |
 | 7 | Dependency verification never disabled | DECISIONS.md |
 | 13 | Signing material never in artifacts, logs or inputs | DECISIONS.md |
@@ -38,6 +38,8 @@ Pointers only.
 | 33 | Repository is `g-c-3/weber` | DECISIONS.md |
 | 34 | Gate screen has a Play Store button (an intent, not a connection) | DECISIONS.md |
 | 35 | Quality targets (start-up, scroll, size) | DECISIONS.md |
+| 36 | Updater: tap only, checksum, PackageInstaller session | DECISIONS.md |
+| 37 | Version Y and Z each 0 to 9 | DECISIONS.md |
 | 32 | `androidx.webkit` pin, license, gate by run-time check, Default profile in Phase 2 | DECISIONS.md |
 
 ## Where to look

@@ -22,4 +22,5 @@ Maps session, decision and roadmap phase to a date. Append only; never edit a pa
 | 16 | 34 | 2 complete | 2026-11-14 | Gate screen with Play Store button for 0.0.8; Phase 2 closed; gate test moved to Phase 5 |
 | 17 | 35 | 3 (step 1) | 2026-11-14 | Targets and Phase 3 approved; flavors and Settings built for 0.0.8 |
 | 18 | none | 3 (DP2) | 2026-11-14 | 0.0.8 checked on device; Settings and scroll recorded |
+| 19 | 36, 37 | 3 (step 2) | 2026-11-14 | Updater built for 0.0.9; version scheme amended |
 

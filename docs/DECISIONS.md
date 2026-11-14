@@ -16,7 +16,7 @@ Rule: GeckoView, release channel only. Exact versions pinned in `gradle/libs.ver
 All engine calls go through one adapter file. Fewest possible Mozilla Android Components.
 Each session checks for a newer stable GeckoView and reports it. A bump is its own task with its own CI check.
 
-## 4. Versioning (D digit and two-APK parts superseded by 27)
+## 4. Versioning (D digit and two-APK parts superseded by 27; Z range by 37)
 Rule: `X.Y.Z`, X unbounded, Y 0 to 9, Z 0 to 99. Start `0.0.1`. Set only in `version.properties`.
 `versionCode = (X*10000 + Y*100 + Z)*10 + D`; D = 1 universal, 2 arm64, 0 Play bundle.
 Compared number by number, never as text. Every shipped change bumps Z by one. Tag `vX.Y.Z` triggers the release.
@@ -187,4 +187,14 @@ Phones without Play Store updates get the text only: update through the phone ma
 ## 35. Quality targets set; Phase 3 approved
 Targets (measured baselines in ROADMAP, Quality targets): cold start to first page 0.50 s or less (mean of 3) and never above 0.60 s in any phase without a decision entry; no white flash, Ardour's own themed window before the page; median scroll gap 17 ms or less, no mid-flick gap over 34 ms in 10 flicks, never worse than a reference browser on the same page and phone; APK 5 MB or less through Phase 8.
 Phase 3 is built in two steps: flavors and Settings first, the updater second. The Settings button over the page is temporary until the browser menu (Phase 4); start-up and scroll are re-measured with it.
+
+## 36. In-app updater (Phase 3 step 2, sideload only)
+Rule: one GET to the latest release (33), then the APK `Ardour-X.Y.Z.apk` from `https://github.com/g-c-3/weber/releases/download/` only, on the button tap. Fixed `User-Agent: Ardour`; the platform default from memory carries device details.
+SHA-256 is read from the release notes and checked before handoff. Notes and APK share a release, so this proves the download is intact, not who made it; the Android same-signature rule on update is the authenticity check.
+Install: `PackageInstaller` session, the user confirms in Android; no new library, no file provider. `REQUEST_INSTALL_PACKAGES` is declared in the sideload manifest only. The status receiver is a mutable `PendingIntent` (platform requirement from target SDK 35).
+Open: Android's developer-verification rules for sideloaded apps (2026) may add prompts; not verified.
+
+## 37. Version scheme amended: Y and Z each 0 to 9
+Amends 4. `X.Y.Z`: X unbounded, Y and Z each 0 to 9. `0.0.9` is followed by `0.1.0`, `0.9.9` by `1.0.0`, `9.9.9` by `10.0.0`. Z was 0 to 99; releases up to 0.0.9 fit both rules, no number is skipped or reused.
+`versionCode` formula unchanged (monotonic with the narrower range). The build rejects a PATCH above 9.
 

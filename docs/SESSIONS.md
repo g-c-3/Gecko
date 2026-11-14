@@ -2,6 +2,13 @@
 
 Numbered, never dated. Dates live in TRACK.md.
 
+## 19
+- Built: Phase 3 step 2, not run through CI or on a device: sideload updater (check on tap, download, SHA-256 against release notes, `PackageInstaller` session), install permission in the sideload manifest only, play stub, version 0.0.9 (decision 36). Version scheme amended: Y and Z each 0 to 9 (decision 37); the build rejects PATCH above 9. Instructions now carry a version number (1).
+- Verified: session flow, mutable `PendingIntent` requirement, install-permission check (platform source and sample code, not the reference page). Not verified: Android developer-verification effect; the `play` flavor is not compiled in CI.
+- Decisions: 36, 37.
+- Engine: `androidx.webkit` 1.18.0. APK size: 0.0.9 not read.
+- Next start: commit, read CI result, then DP3; the install path is tested when 0.1.0 exists.
+
 ## 18
 - Checked: 0.0.8 released and installed. DP2 passed from a recording: Settings shows Ardour 0.0.8 and WebView 157.0.8103.38. Scroll with the Settings button: median gap 16.4 ms, no fast-motion gap over 34 ms, about 3 flicks only.
 - Decisions: none.
