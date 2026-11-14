@@ -203,3 +203,15 @@ Rule: every screen and control looks finished and stylish, however small: gates,
 Mechanics (extends 30): shared helpers in `Ui.kt`; palette ink `#242630`, ember `#E8451D`, paper `#F6F5F3` (from the launcher icon); cards, pill buttons, thin progress and back button drawn by Ardour; spring motion (damping ratio 0.62) for press and entrance, which follows the system animation scale. Text meets contrast on its surface. Light only until theming (Phase 9).
 Check: each device-visible change is judged on a screenshot against this rule before it is called done.
 
+## 39. Version is the build run number
+Amends 4, 16, 37. Rule: with N the run number of `build-android`, `X.Y.Z` is N's digits: X = N div 100, Y = tens digit, Z = ones digit. 87 is 0.8.7; 100 is 1.0.0; 1016 is 10.1.6.
+Derived in CI and passed to Gradle as `-PardourVersion`; `version.properties` is removed. Outside CI the build reads 0.0.0. `versionCode` formula unchanged.
+Release: a successful run on `main` publishes `vX.Y.Z` unless that tag exists (a re-run keeps its number). Pushes touching only `docs/` or `*.md` do not run, so use no number.
+Numbers are used by every run, including failed, pull request and manual runs, so released versions can skip numbers. A skipped number is not an error. Releases 0.0.1 to 0.1.0 stay; every run-number release is higher.
+One upload commit per session: each commit touching code runs a build and releases. Phase 5 pull requests no longer bump a version.
+
+## 40. Light and gradient, with restraint
+Extends 38. Light effects are used only where they carry meaning, never as decoration: none on cards or body text.
+Ember glow (tinted shadow) and a faint ember rim mark the primary action. A slow pulse marks the one element that needs attention (an update waiting to be installed); at most one pulsing element per screen. A sweeping light on the progress bar means something is being checked; a gradient bar with a glowing leading edge shows download progress.
+Effects follow the system animation scale: with animations off they are static. Tinted shadows use platform shadow colors (API 28); how they render on every phone is unverified.
+

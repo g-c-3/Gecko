@@ -2,6 +2,20 @@
 
 Numbered, never dated. Dates live in TRACK.md.
 
+## 22
+- Checked on device: 0.0.9 found 0.1.0 (the old raw release notes showed with code fences; fixed in 0.1.0), downloaded, verified, Android confirmed the update, 0.1.0 installed. DP3 passed. 0.1.0 look passed on a screenshot.
+- Built, not run through CI or on a device: glow, rim light, pulse, sweep and gradient progress per decision 40 (`Ui.kt`, updater rows). Instructions version 4.
+- Decisions: 40.
+- Engine: `androidx.webkit` 1.18.0. APK size: not read.
+- Next start: owner commits in one upload; judge DP16; the release number must equal the run number (decision 39).
+
+## 21
+- Built: version from the build run number (decision 39), not run through CI: workflow computes `X.Y.Z` from `github.run_number`, passes `-PardourVersion` to Gradle; `version.properties` no longer read; docs-only pushes skip the build. Instructions version 3.
+- Risk: workflow and Gradle changed together; a red first run is likely a syntax or version-parse error. Failed runs use numbers, so versions will skip.
+- Decisions: 39.
+- Engine: `androidx.webkit` 1.18.0. APK size: not read.
+- Next start: owner commits in one upload and deletes `version.properties`; check the release number equals the run number; then DP15 and DP3.
+
 ## 20
 - Checked: repo files match the delivered files (all 23 identical; INDEX ranges agree; no secrets, no forbidden words). 0.0.9 on device: Settings shows "up to date (0.0.9)"; the screen looked plain.
 - Built: polish rule (decision 38) and a restyle for 0.1.0, not run through CI or on a device: `Ui.kt` helpers, Settings cards with back button, polished gate screen and Settings button, updater rows with progress bar and shorter release summary. 0.1.0 is also the first real test of the install path.

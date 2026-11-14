@@ -24,4 +24,6 @@ Maps session, decision and roadmap phase to a date. Append only; never edit a pa
 | 18 | none | 3 (DP2) | 2026-11-14 | 0.0.8 checked on device; Settings and scroll recorded |
 | 19 | 36, 37 | 3 (step 2) | 2026-11-14 | Updater built for 0.0.9; version scheme amended |
 | 20 | 38 | 3 (polish) | 2026-11-14 | Repo audit; polish rule; restyle for 0.1.0 |
+| 21 | 39 | CI | 2026-11-14 | Version derived from build run number |
+| 22 | 40 | 3 (DP3, DP15) | 2026-11-14 | Update install passed on device; light effects built |
 
