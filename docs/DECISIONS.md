@@ -215,3 +215,9 @@ Extends 38. Light effects are used only where they carry meaning, never as decor
 Ember glow (tinted shadow) and a faint ember rim mark the primary action. A slow pulse marks the one element that needs attention (an update waiting to be installed); at most one pulsing element per screen. A sweeping light on the progress bar means something is being checked; a gradient bar with a glowing leading edge shows download progress.
 Effects follow the system animation scale: with animations off they are static. Tinted shadows use platform shadow colors (API 28); how they render on every phone is unverified.
 
+## 41. Direct push access
+Amends the manual-commit rule. Rule: the assistant pushes each task's files to `main` with a GitHub token the owner pastes into the conversation.
+Token: fine-grained, this repository only; Contents read and write, Actions read, Workflows read and write while workflow files change; short expiry. It is used only in sandbox calls to github.com and api.github.com. It never appears in the repo, a file, a commit message, a note or a reply. The owner revokes or regenerates it after the session, because a pasted token stays in the conversation.
+Pushes: `main` only, one commit per task (one build, one release), complete files, never a force push or history rewrite, no other repository, no settings, secrets, tags or releases. Ask first before deleting files or changing workflows, signing, manifest permissions or dependencies. Each push is checked against the repo, then the run result is read through the API; a red run is fixed in the next commit.
+Limit: run logs download from `results-receiver.actions.githubusercontent.com`, which the sandbox network blocks. The API still gives the failing step. Error text needs that host allowed in the sandbox network settings, or a workflow step that writes build errors as annotations (needs approval).
+

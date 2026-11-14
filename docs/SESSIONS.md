@@ -2,6 +2,13 @@
 
 Numbered, never dated. Dates live in TRACK.md.
 
+## 23
+- Checked: repo and delivered files identical; run 92 (0.9.2) green after the pulse fix. Token verified: push permission and Actions read work; run logs cannot be downloaded (host blocked in the sandbox), the API gives the failing step only.
+- Built: nothing in code. Direct push access (decision 41); instructions version 5.
+- Decisions: 41.
+- Engine: `androidx.webkit` 1.18.0. APK size: not read.
+- Next start: delete `version.properties` with the next code commit (a push of that alone would release again); DP16; owner allows the log host or approves an error-annotation step.
+
 ## 22
 - Checked on device: 0.0.9 found 0.1.0 (the old raw release notes showed with code fences; fixed in 0.1.0), downloaded, verified, Android confirmed the update, 0.1.0 installed. DP3 passed. 0.1.0 look passed on a screenshot.
 - Built, not run through CI or on a device: glow, rim light, pulse, sweep and gradient progress per decision 40 (`Ui.kt`, updater rows). Instructions version 4.

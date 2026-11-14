@@ -26,4 +26,5 @@ Maps session, decision and roadmap phase to a date. Append only; never edit a pa
 | 20 | 38 | 3 (polish) | 2026-11-14 | Repo audit; polish rule; restyle for 0.1.0 |
 | 21 | 39 | CI | 2026-11-14 | Version derived from build run number |
 | 22 | 40 | 3 (DP3, DP15) | 2026-11-14 | Update install passed on device; light effects built |
+| 23 | 41 | tooling | 2026-11-14 | Direct push access set up; first docs push |
 
