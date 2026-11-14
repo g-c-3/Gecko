@@ -289,7 +289,7 @@ class Pulse(private val view: View) {
 
     fun start() {
         if (anim != null || !ValueAnimator.areAnimatorsEnabled()) return
-        anim = ObjectAnimator.ofFloat(view, View.ELEVATION, base, base + Ui.dp(view.context, 10)).apply {
+        anim = ObjectAnimator.ofFloat(view, "elevation", base, base + Ui.dp(view.context, 10)).apply {
             duration = 1300
             repeatCount = ValueAnimator.INFINITE
             repeatMode = ValueAnimator.REVERSE
