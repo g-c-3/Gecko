@@ -2,10 +2,10 @@ package io.github.g_c_3.ardour
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Typeface
 import android.net.Uri
 import android.provider.Settings
-import android.widget.Button
+import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import java.io.File
@@ -13,22 +13,23 @@ import java.io.File
 // Sideload flavor: "Check for updates" runs only on this tap, never on open or in the background (DECISIONS.md 36).
 object UpdateFeature {
     fun addRows(activity: Activity, column: LinearLayout, currentVersion: String) {
-        fun dp(n: Int) = (n * activity.resources.displayMetrics.density).toInt()
-        column.addView(TextView(activity).apply {
-            text = "Updates"
-            textSize = 14f
-            setTypeface(typeface, Typeface.BOLD)
-            setPadding(0, dp(24), 0, dp(8))
-        })
-        val action = Button(activity).apply { text = "Check for updates" }
-        val status = TextView(activity).apply {
-            textSize = 14f
-            alpha = 0.7f
-            setPadding(0, dp(8), 0, dp(8))
+        column.addView(Ui.sectionLabel(activity, "Updates"))
+        val card = Ui.card(activity)
+        val status = Ui.body(activity, "Check whether a newer Ardour is available.").apply {
+            setPadding(0, Ui.dp(activity, 12), 0, 0)
         }
-        column.addView(action)
-        column.addView(status)
-        val rows = UpdateRows(activity, currentVersion, action, status)
+        val progress = ThinProgress(activity).apply { visibility = View.GONE }
+        val action = Ui.pillButton(activity, "Check for updates")
+        card.addView(status)
+        card.addView(progress, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Ui.dp(activity, 4)).apply {
+            topMargin = Ui.dp(activity, 14)
+        })
+        card.addView(action, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+            topMargin = Ui.dp(activity, 16)
+            bottomMargin = Ui.dp(activity, 12)
+        })
+        column.addView(card, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+        val rows = UpdateRows(activity, currentVersion, action, status, progress)
         action.setOnClickListener { rows.onTap() }
     }
 }
@@ -36,8 +37,9 @@ object UpdateFeature {
 private class UpdateRows(
     val activity: Activity,
     val currentVersion: String,
-    val action: Button,
+    val action: TextView,
     val status: TextView,
+    val progress: ThinProgress,
 ) {
     private var newer: CheckResult.Newer? = null
     private var busy = false
@@ -50,15 +52,18 @@ private class UpdateRows(
 
     private fun ui(block: () -> Unit) = activity.runOnUiThread { if (!activity.isDestroyed) block() }
 
+    private fun setBusy(value: Boolean) {
+        busy = value
+        Ui.setBusy(action, value)
+    }
+
     private fun check() {
-        busy = true
-        action.isEnabled = false
-        status.text = "Checking..."
+        setBusy(true)
+        status.text = "Checking…"
         Thread {
             val result = UpdateCheck.check(currentVersion)
             ui {
-                busy = false
-                action.isEnabled = true
+                setBusy(false)
                 show(result)
             }
         }.start()
@@ -68,7 +73,9 @@ private class UpdateRows(
         when (result) {
             is CheckResult.Newer -> {
                 newer = result
-                status.text = "Version ${result.version} is available.\n\n${result.notes}"
+                // Release notes start with the engine requirement; the checksums that follow stay out of sight.
+                val summary = result.notes.substringBefore("\n\n").take(280)
+                status.text = "Version ${result.version} is available.\n\n$summary"
                 action.text = "Download and install"
             }
             CheckResult.UpToDate -> status.text = "Ardour is up to date ($currentVersion)."
@@ -85,31 +92,34 @@ private class UpdateRows(
             )
             return
         }
-        busy = true
-        action.isEnabled = false
-        status.text = "Downloading... 0%"
+        setBusy(true)
+        progress.value = 0f
+        progress.visibility = View.VISIBLE
+        status.text = "Downloading… 0%"
         Thread {
             try {
                 val file = UpdateCheck.download(update, File(activity.cacheDir, "update")) { pct ->
-                    ui { status.text = "Downloading... $pct%" }
+                    ui {
+                        progress.value = pct / 100f
+                        status.text = "Downloading… $pct%"
+                    }
                 }
-                ui { status.text = "Checksum verified. Asking Android to install..." }
+                ui { status.text = "Checksum verified. Asking Android to install…" }
                 ApkInstaller.install(activity, file)
                 ui {
-                    busy = false
-                    action.isEnabled = true
+                    setBusy(false)
                     status.text = "Confirm the install in the Android screen."
                 }
             } catch (e: SecurityException) {
                 ui {
-                    busy = false
-                    action.isEnabled = true
+                    setBusy(false)
+                    progress.visibility = View.GONE
                     status.text = "The download did not match its checksum. Nothing was installed."
                 }
             } catch (e: Exception) {
                 ui {
-                    busy = false
-                    action.isEnabled = true
+                    setBusy(false)
+                    progress.visibility = View.GONE
                     status.text = "Update failed. Nothing was installed."
                 }
             }
