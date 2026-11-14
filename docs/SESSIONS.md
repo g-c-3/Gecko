@@ -5,6 +5,7 @@ Numbered, never dated. Dates live in TRACK.md.
 ## 22
 - Checked on device: 0.0.9 found 0.1.0 (the old raw release notes showed with code fences; fixed in 0.1.0), downloaded, verified, Android confirmed the update, 0.1.0 installed. DP3 passed. 0.1.0 look passed on a screenshot.
 - Built, not run through CI or on a device: glow, rim light, pulse, sweep and gradient progress per decision 40 (`Ui.kt`, updater rows). Instructions version 4.
+- Fixed: run 91 (0.9.1) failed to compile: `View.ELEVATION` does not exist; the pulse now animates the `elevation` property by name. Version step worked: run 91 gave 0.9.1.
 - Decisions: 40.
 - Engine: `androidx.webkit` 1.18.0. APK size: not read.
 - Next start: owner commits in one upload; judge DP16; the release number must equal the run number (decision 39).
