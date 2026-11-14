@@ -32,7 +32,12 @@ jobs:
           echo "ARDOUR_VERSION=$((N / 100)).$((N / 10 % 10)).$((N % 10))" >> "$GITHUB_ENV"
       - run: test -f gradle/verification-metadata.xml
       - run: chmod +x gradlew
-      - run: ./gradlew --no-daemon :app:assembleSideloadDebug -PardourVersion="$ARDOUR_VERSION"
+      - name: Build debug APK
+        shell: bash
+        run: ./gradlew --no-daemon :app:assembleSideloadDebug -PardourVersion="$ARDOUR_VERSION" 2>&1 | tee gradle.log
+      - name: Annotate build errors
+        if: failure()
+        run: sh .github/ci/annotate-errors.sh gradle.log
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: debug-apks
