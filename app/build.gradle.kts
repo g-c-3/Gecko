@@ -1,15 +1,12 @@
-import java.util.Properties
-
 plugins {
     alias(libs.plugins.android.application)
 }
 
-val versionProps = Properties().apply {
-    rootProject.file("version.properties").inputStream().use { load(it) }
-}
-val verMajor = versionProps.getProperty("MAJOR").toInt()
-val verMinor = versionProps.getProperty("MINOR").toInt()
-val verPatch = versionProps.getProperty("PATCH").toInt()
+// Version comes from the CI run number as -PardourVersion=X.Y.Z (DECISIONS.md 39); 0.0.0 outside CI.
+val ardourVersion = providers.gradleProperty("ardourVersion").getOrElse("0.0.0")
+val verParts = ardourVersion.split(".").map { it.toInt() }
+require(verParts.size == 3) { "ardourVersion must be X.Y.Z" }
+val (verMajor, verMinor, verPatch) = verParts
 require(verMinor in 0..9) { "MINOR must be 0 to 9" }
 require(verPatch in 0..9) { "PATCH must be 0 to 9" }
 val baseCode = (verMajor * 10000 + verMinor * 100 + verPatch) * 10
