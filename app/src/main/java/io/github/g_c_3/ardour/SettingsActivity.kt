@@ -20,6 +20,7 @@ class SettingsActivity : Activity() {
         column.addView(section("About"))
         column.addView(row("Ardour version", appVersion()))
         column.addView(row("WebView version", EngineAdapter.webViewVersion(this) ?: "not found"))
+        UpdateFeature.addRows(this, column, appVersion())
 
         val scroll = ScrollView(this).apply {
             addView(column, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
