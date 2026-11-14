@@ -2,6 +2,13 @@
 
 Numbered, never dated. Dates live in TRACK.md.
 
+## 20
+- Checked: repo files match the delivered files (all 23 identical; INDEX ranges agree; no secrets, no forbidden words). 0.0.9 on device: Settings shows "up to date (0.0.9)"; the screen looked plain.
+- Built: polish rule (decision 38) and a restyle for 0.1.0, not run through CI or on a device: `Ui.kt` helpers, Settings cards with back button, polished gate screen and Settings button, updater rows with progress bar and shorter release summary. 0.1.0 is also the first real test of the install path.
+- Decisions: 38.
+- Engine: `androidx.webkit` 1.18.0. APK size: 0.0.9 and 0.1.0 not read.
+- Next start: commit; read CI; DP15 on a screenshot; then DP3 install from 0.0.9 to 0.1.0.
+
 ## 19
 - Built: Phase 3 step 2, not run through CI or on a device: sideload updater (check on tap, download, SHA-256 against release notes, `PackageInstaller` session), install permission in the sideload manifest only, play stub, version 0.0.9 (decision 36). Version scheme amended: Y and Z each 0 to 9 (decision 37); the build rejects PATCH above 9. Instructions now carry a version number (1).
 - Verified: session flow, mutable `PendingIntent` requirement, install-permission check (platform source and sample code, not the reference page). Not verified: Android developer-verification effect; the `play` flavor is not compiled in CI.

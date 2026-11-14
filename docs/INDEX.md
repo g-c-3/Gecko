@@ -7,9 +7,9 @@ Pointers only.
 | File | Holds | Range | Older parts |
 |---|---|---|---|
 | ROADMAP.md | Phase checklist, detail, quality targets | Phases 0-13 | none |
-| DECISIONS.md | Numbered decisions | 1-37 | none |
-| SESSIONS.md | Session log | 1-19 | none |
-| TRACK.md | Session/decision/phase to date | Sessions 1-19 | none |
+| DECISIONS.md | Numbered decisions | 1-38 | none |
+| SESSIONS.md | Session log | 1-20 | none |
+| TRACK.md | Session/decision/phase to date | Sessions 1-20 | none |
 | ARCHITECTURE.md | Layers, network, security checks, CI | n/a | none |
 
 ## Standing decisions
@@ -40,6 +40,7 @@ Pointers only.
 | 35 | Quality targets (start-up, scroll, size) | DECISIONS.md |
 | 36 | Updater: tap only, checksum, PackageInstaller session | DECISIONS.md |
 | 37 | Version Y and Z each 0 to 9 | DECISIONS.md |
+| 38 | Polish rule: nothing ships looking plain; shared `Ui.kt` | DECISIONS.md |
 | 32 | `androidx.webkit` pin, license, gate by run-time check, Default profile in Phase 2 | DECISIONS.md |
 
 ## Where to look

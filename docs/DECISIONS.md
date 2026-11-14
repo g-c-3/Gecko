@@ -198,3 +198,8 @@ Open: Android's developer-verification rules for sideloaded apps (2026) may add 
 Amends 4. `X.Y.Z`: X unbounded, Y and Z each 0 to 9. `0.0.9` is followed by `0.1.0`, `0.9.9` by `1.0.0`, `9.9.9` by `10.0.0`. Z was 0 to 99; releases up to 0.0.9 fit both rules, no number is skipped or reused.
 `versionCode` formula unchanged (monotonic with the narrower range). The build rejects a PATCH above 9.
 
+## 38. Polish rule
+Rule: every screen and control looks finished and stylish, however small: gates, error states, placeholder buttons, status text. A plain system default is a defect, not a placeholder.
+Mechanics (extends 30): shared helpers in `Ui.kt`; palette ink `#242630`, ember `#E8451D`, paper `#F6F5F3` (from the launcher icon); cards, pill buttons, thin progress and back button drawn by Ardour; spring motion (damping ratio 0.62) for press and entrance, which follows the system animation scale. Text meets contrast on its surface. Light only until theming (Phase 9).
+Check: each device-visible change is judged on a screenshot against this rule before it is called done.
+

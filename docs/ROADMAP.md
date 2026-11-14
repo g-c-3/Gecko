@@ -60,11 +60,12 @@ Settings (decision 20): basic options by default; an Advanced section holds the 
 - DP14: passed on 0.0.7 (owner screenshot): clock and status icons dark and readable. Navigation bar not visible in the screenshot, not confirmed.
 
 ### 3 Settings screen and in-app update
+- DP15: 0.1.0 look on device: Settings cards, buttons, back button, press and entrance motion, Settings button over a page. Judge on a screenshot against decision 38.
 - Settings screen: basic list plus Advanced section (decision 20); "Check for updates" (sideload only). About shows the app version and the phone's WebView version.
-- Step 1 (0.0.8, released, run on device): `sideload` and `play` flavors, Settings screen with About (app and WebView version), temporary Settings button. Step 2 (0.0.9, built, not run through CI or on a device): updater per decision 36. Advanced section waits for its first setting.
+- Step 1 (0.0.8, released, run on device): `sideload` and `play` flavors, Settings screen with About (app and WebView version), temporary Settings button. Step 2 (0.0.9, released): updater per decision 36; check shows "up to date" on device. 0.1.0 restyles Settings, the gate screen and the Settings button to the polish rule (decision 38), not yet run through CI or on a device. Advanced section waits for its first setting.
 - Version compare number by number; the one APK (decision 27); SHA-256 check; system installer.
 - (planned) Local crash log, shared only on tap.
-- DP3: on 0.0.9 tap "Check for updates": expect "up to date" while 0.0.9 is newest. The install path needs a newer release: 0.1.0 is the first test (check, download, checksum, confirm, install over 0.0.9). Also check the install permission screen and the rate-limit text if shown.
+- DP3: 0.0.9 "Check for updates" says up to date (owner screenshot). Next: from 0.0.9 tap it when 0.1.0 exists and run the install path. The install path needs a newer release: 0.1.0 is the first test (check, download, checksum, confirm, install over 0.0.9). Also check the install permission screen and the rate-limit text if shown.
 - DP2: passed on 0.0.8 (owner recording): Settings opens, Ardour 0.0.8, WebView 157.0.8103.38 (com.google.android.webview). Scroll with the button present: median gap 16.4 ms, no fast-motion gap over 34 ms (about 3 flicks, short of the 10 the target asks). Start-up with the button not re-measured. DP3: update check and install.
 
 ### 4 Basic browser
