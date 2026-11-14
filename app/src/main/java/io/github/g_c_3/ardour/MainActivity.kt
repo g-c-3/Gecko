@@ -8,12 +8,8 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
-import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
-import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
-import android.widget.TextView
 
 class MainActivity : Activity() {
     @Suppress("DEPRECATION")
@@ -43,15 +39,7 @@ class MainActivity : Activity() {
     }
 
     // Temporary entry to Settings until the browser menu (Phase 4).
-    private fun settingsButton(): View = TextView(this).apply {
-        text = "Settings"
-        textSize = 14f
-        setTextColor(Color.WHITE)
-        setPadding(dp(16), dp(10), dp(16), dp(10))
-        background = GradientDrawable().apply {
-            setColor(0xCC242630.toInt())
-            cornerRadius = dp(24).toFloat()
-        }
+    private fun settingsButton(): View = Ui.floatingPill(this, "Settings").apply {
         setOnClickListener { startActivity(Intent(this@MainActivity, SettingsActivity::class.java)) }
     }
 
@@ -59,25 +47,22 @@ class MainActivity : Activity() {
         ViewGroup.LayoutParams.WRAP_CONTENT,
         ViewGroup.LayoutParams.WRAP_CONTENT,
         Gravity.BOTTOM or Gravity.END,
-    ).apply { setMargins(dp(16), dp(16), dp(16), dp(16)) }
-
-    private fun dp(n: Int): Int = (n * resources.displayMetrics.density).toInt()
+    ).apply { setMargins(Ui.dp(this@MainActivity, 16), Ui.dp(this@MainActivity, 16), Ui.dp(this@MainActivity, 16), Ui.dp(this@MainActivity, 16)) }
 
     private fun gateView(message: String): View {
+        val pad = Ui.dp(this, 32)
         val column = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            gravity = Gravity.CENTER
-            setPadding(64, 64, 64, 64)
+            gravity = Gravity.CENTER_VERTICAL
+            setBackgroundColor(Ui.PAPER)
+            setPadding(pad, pad, pad, pad)
         }
-        column.addView(TextView(this).apply {
-            text = message
-            textSize = 18f
-            gravity = Gravity.CENTER
+        column.addView(Ui.title(this, "Update WebView").apply { textSize = 28f })
+        column.addView(Ui.body(this, message).apply {
+            textSize = 16f
+            setPadding(0, Ui.dp(this@MainActivity, 16), 0, Ui.dp(this@MainActivity, 28))
         })
-        column.addView(Button(this).apply {
-            text = "Open Play Store"
-            setOnClickListener { openWebViewPage() }
-        })
+        column.addView(Ui.pillButton(this, "Open Play Store").apply { setOnClickListener { openWebViewPage() } })
         return column
     }
 
