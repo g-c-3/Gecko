@@ -11,7 +11,7 @@ val verMajor = versionProps.getProperty("MAJOR").toInt()
 val verMinor = versionProps.getProperty("MINOR").toInt()
 val verPatch = versionProps.getProperty("PATCH").toInt()
 require(verMinor in 0..9) { "MINOR must be 0 to 9" }
-require(verPatch in 0..99) { "PATCH must be 0 to 99" }
+require(verPatch in 0..9) { "PATCH must be 0 to 9" }
 val baseCode = (verMajor * 10000 + verMinor * 100 + verPatch) * 10
 
 android {
