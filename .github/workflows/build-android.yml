@@ -3,7 +3,9 @@ name: build-android
 on:
   push:
     branches: [main]
+    paths-ignore: ['docs/**', '**.md']
   pull_request:
+    paths-ignore: ['docs/**', '**.md']
   workflow_dispatch:
 
 permissions:
@@ -23,9 +25,14 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - name: Version from run number
+        # Digits of the run number: 87 is 0.8.7, 1016 is 10.1.6 (DECISIONS.md 39).
+        run: |
+          N=${{ github.run_number }}
+          echo "ARDOUR_VERSION=$((N / 100)).$((N / 10 % 10)).$((N % 10))" >> "$GITHUB_ENV"
       - run: test -f gradle/verification-metadata.xml
       - run: chmod +x gradlew
-      - run: ./gradlew --no-daemon :app:assembleSideloadDebug
+      - run: ./gradlew --no-daemon :app:assembleSideloadDebug -PardourVersion="$ARDOUR_VERSION"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: debug-apks
@@ -42,10 +49,10 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - id: check
-        # A release is made only when version.properties holds a version that has no tag yet.
+        # Version = digits of the run number (DECISIONS.md 39). A release is made unless its tag exists (a re-run).
         run: |
-          . ./version.properties
-          V="$MAJOR.$MINOR.$PATCH"
+          N=${{ github.run_number }}
+          V="$((N / 100)).$((N / 10 % 10)).$((N % 10))"
           echo "version=$V" >> "$GITHUB_OUTPUT"
           if git ls-remote --exit-code --tags origin "refs/tags/v$V" > /dev/null; then
             echo "needed=false" >> "$GITHUB_OUTPUT"
@@ -81,7 +88,7 @@ jobs:
           KEYSTORE_PATH: ${{ runner.temp }}/ardour-release.p12
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-        run: ./gradlew --no-daemon :app:assembleSideloadRelease
+        run: ./gradlew --no-daemon :app:assembleSideloadRelease -PardourVersion="$VERSION"
       - name: Remove keystore
         if: always()
         run: rm -f "$RUNNER_TEMP/ardour-release.p12"
