@@ -1,6 +1,6 @@
 # Architecture
 
-Status: releases up to 0.0.5 run GeckoView. The 0.0.6 files move the repo to WebView (decisions 26, 32); not yet built.
+Status: releases from 0.0.6 run system WebView (decisions 26, 32).
 
 ## Layers
 - `app/`: Kotlin Android module. Plain Android views, custom drawn (DECISIONS.md 30). No Compose, no Mozilla components, no native code (27).
@@ -49,7 +49,7 @@ The GeckoView additions (Kotlin 2.4.20 override, compileSdk 37.2, `useLegacyPack
 ## Build and CI
 - Gradle (Kotlin DSL), run only by GitHub Actions.
 - `build-android.yml`, jobs:
-  - `build`: debug APK on every push, pull request and manual run.
+  - `build`: debug APK on every push, pull request and manual run. Gradle output goes to `gradle.log`; on failure `.github/ci/annotate-errors.sh` writes the errors as annotations (decision 42).
   - `plan`: on push to `main`; version from the run number (decision 39); releases only if tag `vX.Y.Z` does not exist. Pushes touching only `docs/` or `*.md` do not run.
   - `release`: after `build` and `plan`; signs with repository secrets `KEYSTORE_BASE64`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`; verifies the certificate SHA-256 (DECISIONS.md 15); publishes the release and tag (DECISIONS.md 16). One APK `Ardour-X.Y.Z.apk` (27); release notes carry the WebView requirement and the `androidx.webkit` pin read from `libs.versions.toml`.
 - Signing in Gradle reads `KEYSTORE_PATH`, `KEYSTORE_PASSWORD`, `KEY_ALIAS` from the environment; without them release APKs stay unsigned.

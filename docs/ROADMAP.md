@@ -67,6 +67,7 @@ Settings (decision 20): basic options by default; an Advanced section holds the 
 - Version compare number by number; the one APK (decision 27); SHA-256 check; system installer.
 - (planned) Local crash log, shared only on tap.
 - DP3: passed (owner screenshots): 0.0.9 found 0.1.0, downloaded, passed the checksum, Android asked to update, 0.1.0 installed over it. The install path needs a newer release: 0.1.0 is the first test (check, download, checksum, confirm, install over 0.0.9). Also check the install permission screen and the rate-limit text if shown.
+- 0.9.3 (released): `version.properties` removed; CI writes build errors as annotations (decision 42). DP16 still pending on a device.
 - DP2: passed on 0.0.8 (owner recording): Settings opens, Ardour 0.0.8, WebView 157.0.8103.38 (com.google.android.webview). Scroll with the button present: median gap 16.4 ms, no fast-motion gap over 34 ms (about 3 flicks, short of the 10 the target asks). Start-up with the button not re-measured. DP3: update check and install.
 
 ### 4 Basic browser

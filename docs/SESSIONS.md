@@ -2,6 +2,13 @@
 
 Numbered, never dated. Dates live in TRACK.md.
 
+## 24
+- Checked: docs, INDEX ranges and sizes (all under 60 KB); `androidx.webkit` 1.18.0 still the newest stable (developer.android.com).
+- Built, run 93 green and released as 0.9.3: `version.properties` deleted; build errors written as annotations (`.github/ci/annotate-errors.sh`, decision 42). Not yet seen on a real failure.
+- Decisions: 42.
+- Engine: `androidx.webkit` 1.18.0. APK size: 3,051,824 bytes (2.91 MiB) at 0.9.3, from the release asset.
+- Next start: DP16 (owner, device); read the annotations on the first red run; Phase 4 approval, or a decision on the local crash log.
+
 ## 23
 - Checked: repo and delivered files identical; run 92 (0.9.2) green after the pulse fix. Token verified: push permission and Actions read work; run logs cannot be downloaded (host blocked in the sandbox), the API gives the failing step only.
 - Built: nothing in code. Direct push access (decision 41); instructions version 5.

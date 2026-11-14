@@ -221,3 +221,8 @@ Token: fine-grained, this repository only; Contents read and write, Actions read
 Pushes: `main` only, one commit per task (one build, one release), complete files, never a force push or history rewrite, no other repository, no settings, secrets, tags or releases. Ask first before deleting files or changing workflows, signing, manifest permissions or dependencies. Each push is checked against the repo, then the run result is read through the API; a red run is fixed in the next commit.
 Limit: run logs download from `results-receiver.actions.githubusercontent.com`, which the sandbox network blocks. The API still gives the failing step. Error text needs that host allowed in the sandbox network settings, or a workflow step that writes build errors as annotations (needs approval).
 
+## 42. Build errors as annotations
+Rule: the `build` job writes Gradle output to `gradle.log`; on failure `.github/ci/annotate-errors.sh` writes compiler errors (up to 10), the "What went wrong" block, or the last 15 log lines as workflow annotations. The check-runs annotations API returns them to the token (decision 41), so the log download host is not needed.
+Scope: the debug build only. The `release` job is not annotated: it handles signing material (decision 13).
+Checked: script run on sample logs; annotations endpoint answers 200 with the token and 403 without. Not checked: annotations from a real failed run.
+`version.properties` is deleted; nothing has read it since decision 39.
